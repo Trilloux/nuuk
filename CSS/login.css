@@ -1,15 +1,12 @@
 *{
     box-sizing: border-box;
 }
-
 body{
     width: 70vw;
     margin: auto;
     font-family: Mono, monospace;
-   
 }
-
-
+/*div wrapper */
 #wrapper{
     margin-top: 10vw;
     display: flex;
@@ -19,31 +16,65 @@ body{
     min-height: 70vw;
     background-color: white;
 }
-
+/* Cloud images animation settings*/
+@keyframes cloud_move {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  /* cloud img 1*/
+  #cloud_1 {
+    z-index: 2;
+    position: absolute;
+    top: 6%;
+    right: 12%;
+    width: 25%;
+    height: 26%;
+    animation: cloud_move 4s infinite linear alternate; /* 4s - animation duaration, infinite - repeat all time, linear - linear movement, alternate - change direction*/
+  }
+  /* cloud img 2 */
+  #cloud_2 {
+    z-index: 1;
+    position: absolute;
+    top: 6%;
+    right: 10%;
+    width: 17%;
+    height: 20%;
+    animation: cloud_move 3s infinite linear alternate; 
+  }
+/* div cointainer*/
 #container{
     display: flex;
     flex-direction: column;
     width:100%;
     height:550px;
     align-items: center;
-    background-color: #0000CC;
+    background-image: linear-gradient(to right bottom, #0046a0, #004bb2, #0050c4, #0054d7, #0458e9);
     border-radius: 5px;
-    
 }
-
+/* div header*/
 #header{
     width: 100%;
-    height: 35%;
+    height: 25%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    margin-top: 1%;
 }
+/* Logo image*/
 #header img{
     width: 27%;
-    height: 39%;
+    height: 60%;
     margin-left: 3%;
 }
+/* div form_field*/
 #form_field{
     display:flex;
     flex-direction: column;
@@ -51,12 +82,11 @@ body{
     align-items: center;
     width: 50%;
     height: 40%;
-    background-color: #FF9900;
+    background-color: #FFA824;
     text-align: center;
     border-radius: 5px;
-    
 }
-
+/* div form*/
 #form{
     margin-top:5%;
     width: 60%;
@@ -66,62 +96,103 @@ body{
     color: white;
     font-weight: bold;
 }
-
+/* input fields for username and password*/
 #username, #password{
     margin-top: 3%;
     margin-bottom: 3%;
     width: 100%;
     height: 30px;
+    border-radius: 3px;
+    border: 0px;
 }
-
+/* PHP login error animation settings */
+@keyframes loginError_Anim {
+	0% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+		transform-origin: center center;
+	}
+	10% {
+		animation-timing-function: ease-in;
+		transform: scale(0.91);
+	}
+	17% {
+		animation-timing-function: ease-out;
+		transform: scale(0.98);
+	}
+	33% {
+		animation-timing-function: ease-in;
+		transform: scale(0.87);
+	}
+	45% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+	}
+}
+/* PHP error for invalid Username/Password */
+#login_error{
+color:white;
+font-size: medium;
+animation: loginError_Anim 4s ease 0s 1 normal forwards;
+}
+/* Button class settings (Login/Reset)*/
 .button{
     justify-self: flex-end;
 }
-
+/* Login button*/
 #sub_button{
     margin-top: 3%;
     display: inline-block;
     width: 17%;
     height: 6%;
     border-radius: 15px;
-    background-color: #FF9900;
+    background-color: #FFA824;
     font-size: large;
     font-weight: bold;
     font-family: Mono, monospace;
     color: white;
-    
+    border: none;
 }
-
+#sub_button:hover{
+    /* SUBMIT button hover effects*/
+    box-shadow: 0 16px 16px 0 rgba(0,0,0,0.2), 0 16px 20px 10px rgba(0,0,0,0.19); 
+    transform: scale(1.1);
+}
+/* Forgot password? button*/
 #reset_button{
-    background-color: #0000CC;
-    color: #FF9900;
+    background-image: none;
+    color: #FFA824;
     text-decoration: none;
     border: none;
     font-size: medium;
     font-weight: bolder;
-    
 }
-
+/* When clicked Forgot password?*/
 #reset_button:active{
-    color: #FF9900;
+    color: #FFA824;
 }
 
+/*div footer */
 #footer{
     margin-top: 55%;
-    color: #0000CC;
+    color:#0046a0;
     font-weight: 200;
+    text-align:center;
 }
-
-
-
+/*Backlinks image settings*/
+#footer img{
+    width: 6%;
+    height: 6%;
+}
+/*JS generated error message settings*/
 span.error-message {
     display: none;
-    color: red;
+    color: white;
     font-size: 0.8vw;
     width: 100%;
     height: 3%;
 }
-
+/* Different font color for label Username(*) Password(*) */
 .req-field{
     color: red;
 }
