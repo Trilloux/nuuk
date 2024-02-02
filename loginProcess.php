@@ -18,7 +18,7 @@ if (isset($_POST['save'])) {
     $stmt = $con->prepare("SELECT * FROM users WHERE username=? AND password=?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
-
+    
     // Get the result of the query
     $result = $stmt->get_result();
 
@@ -38,9 +38,10 @@ if (isset($_POST['save'])) {
         $_SESSION["email"] = $row['email'];
         $_SESSION["firstName"] = $row['firstName'];
         $_SESSION["lastName"] = $row['lastName'];
+        $_SESSION["role"]= $row['role'];
 
         // Redirect to the home page
-        header("Location: home.php");
+        header("Location: home.php?id=1");
     } else {
         // If no matching user is found, set an error message and redirect to the login page
         $_SESSION['login_error'] = "Invalid Username/Password!";

@@ -1,0 +1,26 @@
+h1{
+color: #FFA824;
+}
+div #user_actions, #news_actions{
+    border-bottom: 2px dashed  #FFA824;
+}
+.admin_buttons{
+display: inline-block;
+min-width: 25%;
+height: 2.5vw;
+margin-bottom: 3%;
+background-color: #FFA824;
+border: none;
+border-radius: 15px;
+}
+.admin_buttons:hover{
+box-shadow: 0 16px 16px 0 rgba(0,0,0,0.2), 0 16px 20px 10px rgba(0,0,0,0.19); 
+transform: scale(1);
+}
+.admin_buttons a{
+color: white;
+text-decoration-line: none;
+font-family: Mono, monospace;
+font-size:1.2vw;
+font-weight: bold;
+}

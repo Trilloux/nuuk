@@ -1,0 +1,60 @@
+
+    #create_user_form{
+        width: 80%;
+        height: 80%;
+        margin-top: 5%;
+    }
+    #heading_create_user{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color:#FFA824;
+        font-size: larger;
+    }
+    #user_form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 50%;
+        text-align: center;
+    }
+    #user_form input{
+        width: 50%;
+        height: 10%;
+        border: 1px solid #FFA824;
+        border-radius: 3px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        text-align: center;
+        font-size: 1vw;
+    }
+    select{
+        width: 30%;
+        height: 10%;
+        border: 1px solid #FFA824;
+        border-radius: 3px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        font-size: 1vw;
+    }
+    table, th, td{
+        border: 1px solid #FFA824 ;
+        font-size: 0.8vw;
+    }
+    
+    #user_list{
+    margin-top: 8%;
+    }
+
+    #edit_userlist {
+        text-decoration: none;
+        color: initial; 
+    }
+    
+    a:visited #edit_userlist {
+        color: black;
+    }
+    

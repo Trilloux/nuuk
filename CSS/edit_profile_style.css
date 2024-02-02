@@ -1,0 +1,96 @@
+*{
+    box-sizing: border-box;
+   
+}
+#profile_form_field{
+    width: 80%;
+    height: 80%;
+    margin-top: 5%;
+}
+#profile_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    text-align: center;
+}
+#profile_form input{
+    width: 50%;
+    height: 10%;
+    border: 1px solid #FFA824;
+    border-radius: 3px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    font-size: 1vw;
+    
+}
+#profile_pic{
+width: 100%;
+height: 10%;
+margin-bottom: 2%;
+margin-top: 2%;
+}
+#profile_pic input[type="file"] {
+    display: none; /* Paslēpj ievades lauku */
+}
+
+#profile_pic label {
+    display: inline-block;
+    background-color: #FFA824;
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 30%;
+    height: 2vw;
+    text-align: center;
+    font-size: 1.25vw;
+    padding-top: 0.5%;
+    font-weight: bolder;
+
+}
+
+#profile_pic label:hover {
+    background-color: #E68A00;
+}
+
+input.form_button{
+    display: inline-block;
+    width: 20% !important;
+    min-height: 2vw !important;
+    background-color:#FFA824;
+    border: none;
+    border-radius: 15px !important;
+    cursor: pointer;
+    margin-left: 3%;
+    margin-right: 3%;
+    color: white;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+
+.form_button:hover{
+    box-shadow: 0 16px 16px 0 rgba(0,0,0,0.2), 0 16px 20px 10px rgba(0,0,0,0.19); 
+    transform: scale(1);
+}
+#button_field{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;   
+}
+
+#prof_pic_edit{
+    margin-left:33%;
+    width: 35%;
+    height: 27%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%; /* Circle */
+ 
+}
