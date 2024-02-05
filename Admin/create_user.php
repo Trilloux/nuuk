@@ -31,12 +31,10 @@ include 'admin_methods_user.php';
             </select>
             <div id="button_field">
                 <?php if (isset($edit_id)) : ?>
-        <!-- Ja ir rediģēšanas režīms, pievienot slepto lauku ar edit_id vērtību -->
         <!-- IF chosen edit user , will display Update on button and post will be = $_POST['submit_update'] > updateUser() -->
         <input type="hidden" name="update_id" value="<?php echo $edit_id; ?>">
         <input type="submit" name="submit_update" value="Update" class="form_button">
     <?php else : ?>
-        <!-- Ja ir izveidošanas režīms, lietot parastu submit nosaukumu -->
         <!-- IF chosen create user , will display Create on button and post will be = $_POST['submit'] > createUser()-->
         <input type="submit" name="submit" value="Create" class="form_button">
     <?php endif; ?>

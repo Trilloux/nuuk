@@ -88,7 +88,7 @@ function deleteUser($deleteId) {
     if (mysqli_stmt_affected_rows($del_stmt) > 0) {
         echo "User deleted!";
     } else {
-        echo "Error deleting user!";
+        echo "Error deleting user.";
         echo $deleteId;
     }
 }

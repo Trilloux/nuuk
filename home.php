@@ -51,7 +51,7 @@ if (!isset($_SESSION["id"])) {
     		<div id="container">
     			<div id="control_panel">
 					<button class="cp_button"><a href="?id=1"><img src="PIC/main.png" alt=""></a></button>
-					<button class="cp_button"><a href=""><img src="PIC/tasks.png" alt=""></a></button>
+					<button class="cp_button"><a href="?id=2"><img src="PIC/tasks.png" alt=""></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/calendar.png" alt=""></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/messages.png" alt=""></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/alerts.png" alt=""></a></button>
@@ -61,13 +61,19 @@ if (!isset($_SESSION["id"])) {
 				<div id="main">
 					<?php
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin' && $_SESSION['role'] == 'admin'){
-						include 'admin/admin_dashboard.php';
+						include 'Admin/admin_dashboard.php';
 					}
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_1' && $_SESSION['role'] == 'admin'){
-						include 'admin/create_user.php';
+						include 'Admin/create_user.php';
 					}
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_2' && $_SESSION['role'] == 'admin'){
-						include 'admin/edit_user.php';
+						include 'Admin/edit_user.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_3' && $_SESSION['role'] == 'admin'){
+						include 'main/news_form.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_4' && $_SESSION['role'] == 'admin'){
+						include 'main/edit_news.php';
 					}
 					
 					if($_GET['id']=='edit_id'){
@@ -75,6 +81,9 @@ if (!isset($_SESSION["id"])) {
 					}
 					if($_GET['id']==1){
 						include 'main/news.php';
+					}
+					if($_GET['id']==2){
+						include 'tasks/tasks_dashboard.php';
 					}
 					?>
 				</div>

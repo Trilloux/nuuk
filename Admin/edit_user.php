@@ -19,6 +19,7 @@ include 'admin_methods_user.php';
                 <th colspan="2">Action</th>
             </tr>
         <?php
+        //query to Get user data in DB
         $show_query = 'SELECT * FROM users';
         $show_result = mysqli_query($con, $show_query);
         while($row=mysqli_fetch_array($show_result)){
