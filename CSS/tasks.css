@@ -1,0 +1,121 @@
+#tasks_wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#tasks_cpanel{
+    margin-top: 7%;
+    width: 100%;
+    height: 4vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 2px dashed #FFA824;
+}
+#tasks_cpanel a{
+    color: #FFA824;
+    text-decoration-line: none;
+}
+.task_buttons{
+    display: inline-block;
+    border: none;
+    background-color:transparent;
+    color: #FFA824;
+    font-size: 1.5vw;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 3;
+    transition: text-shadow 0.3s ease;
+}
+.task_buttons:hover{
+    transform: scale(1.1); 
+}
+#tasks_list{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+#task_block {
+   margin-top: 2%;
+}
+#tasks td,
+#tasks tr,
+#tasks table {
+    font-size: 1.1vw;
+    font-weight: 600;
+    color: white;
+    border-radius: 5px;
+    border: 1.5px solid white !important;
+    max-width: 90%;
+}
+#tasks{
+    border:1px solid white !important;
+}
+#tb_title{
+    text-align: center;
+    font-size: 1.2vw !important;
+}
+#tb_checkbox {
+    background-color: white !important;
+}
+#spacer-row{
+    height: 1vw;
+}
+#spacer-row td{
+    background-color: white;
+}
+.high-priority{
+    background-color: lightcoral !important;
+}
+.medium-priority{
+    background-color: #FFA824 !important;
+}
+.low-priority{
+    background-color: lightseagreen !important;
+}
+#task_form_wrapper{
+    width: 90%;
+   margin-top: 5%;
+}
+#task_form{
+    display: flex;
+    flex-direction: column;
+}
+#task_form input{
+    width: 40%;
+    height: 2vw;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    border: 1px solid #FFA824;
+    font-size: 1vw;
+}
+input[type="datetime-local"]{
+    width: 25% !important;
+    align-items: center;
+}
+#task_form textarea{
+    width: 90%;
+    height: 8vw;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    border: 1px solid #FFA824;
+    resize: none;
+    font-size: 1vw;
+}
+
+#task_priority{
+    width: 25%;
+    font-size: 1vw;
+}
+
+#task_form_header{
+    color: #FFA824;
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight: inherit;
+}

@@ -24,6 +24,7 @@ if (!isset($_SESSION["id"])) {
 		   <link rel="stylesheet" href="CSS/news.css">
 		   <link rel="stylesheet" href="CSS/admin_dashboard.css">
 		   <link rel="stylesheet" href="CSS/create_edit_user.css">
+		   <link rel="stylesheet" href="CSS/tasks.css">
 		   <script src="JS/onload_home.js"></script>
 	</head>
 	<body>
@@ -75,7 +76,6 @@ if (!isset($_SESSION["id"])) {
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_4' && $_SESSION['role'] == 'admin'){
 						include 'main/edit_news.php';
 					}
-					
 					if($_GET['id']=='edit_id'){
 						include 'edit_profile.php';
 					}
@@ -84,6 +84,9 @@ if (!isset($_SESSION["id"])) {
 					}
 					if($_GET['id']==2){
 						include 'tasks/tasks_dashboard.php';
+					}
+					if($_GET['id']==21){
+						include 'tasks/tasks_form.php';
 					}
 					?>
 				</div>
