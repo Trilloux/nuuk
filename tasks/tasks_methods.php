@@ -1,13 +1,16 @@
 <?php 
 include 'database.php';
-
+//Get user info from session
 if (isset($_SESSION['id'])) {
     $get_id = $_SESSION['id'];
     $get_name = $_SESSION['firstName'];
     $get_lastname=$_SESSION['lastName'];
-    $table_name= $get_id.'_'.$get_name.'_'.$get_lastname.'_tasks';
+    $table_name = 'user_' . $get_id . '_tasks';
     findTable($table_name);
 }
+//Find Task table for user, if user doesn't have table 
+//Create new table with user id and first name and last name
+//Only 1 table will be created because of user specifics
 function findTable($table_name){
     global $con;
     $getTab_query="SHOW TABLES LIKE '$table_name'";
@@ -28,7 +31,7 @@ function createTable($table_name){
         description TEXT,
         priority ENUM ('low', 'medium', 'high') DEFAULT 'medium',
         status ENUM('active', 'completed') DEFAULT 'active',  -- Enclose 'completed' in single quotes
-        alert DATETIME,
+        alert DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)  -- Correct the foreign key declaration
     )";
     
@@ -60,7 +63,8 @@ if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
     // Create new variables from form input fields when form is submitted
     $task_title = mysqli_real_escape_string($con, $_POST['title']);
     $task_descr = mysqli_real_escape_string($con, $_POST['description']);
-    $task_alert = mysqli_real_escape_string($con, $_POST['alert']);
+    //Set default to alert if not added alert time
+    $task_alert = !empty($_POST['alert']) ? mysqli_real_escape_string($con, $_POST['alert']) : NULL;
     $task_priority = mysqli_real_escape_string($con, $_POST['priority']);
     $task_by = $_SESSION['firstName'];
     $user_id = $_SESSION['id'];
@@ -73,6 +77,7 @@ if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
 }
 function postTask($table_name, $user_id, $task_by, $task_title, $task_descr, $task_priority, $task_alert) {
     global $con;
+    
     $newTask_query = "INSERT INTO $table_name (user_id, created_by, title, description, priority, alert) VALUES (?,?, ?, ?, ?, ?)";
     $newTask_stmt = mysqli_prepare($con, $newTask_query);
     if ($newTask_stmt) {
@@ -110,7 +115,6 @@ if (isset($_GET['delete_ids'])) {
 
 function deleteTasks($table_name, $del_ids) {
     global $con;
-
     // Loop through each ID and delete the corresponding task
     foreach ($del_ids as $del_id) {
         $delTask_query = "DELETE FROM $table_name WHERE id = ?";
@@ -120,11 +124,6 @@ function deleteTasks($table_name, $del_ids) {
             mysqli_stmt_bind_param($delTask_stmt, 'i', $del_id);
             mysqli_stmt_execute($delTask_stmt);
             
-            if (mysqli_stmt_affected_rows($delTask_stmt) > 0) {
-                echo "Tasksdeleted successfully!";
-            } else {
-                echo "Error deleting tasks!";
-            }
         } else {
             echo "Error preparing statement: " . mysqli_error($con) . "<br>";
         }
@@ -132,5 +131,52 @@ function deleteTasks($table_name, $del_ids) {
     }
 }
 
+
+if (isset($_GET['comp_ids'])) {
+    $comp_ids = explode(',', $_GET['comp_ids']); // Split the comma-separated string into an array of IDs
+    tasksCompl($table_name, $comp_ids);
+}
+
+function tasksCompl($table_name, $comp_ids){
+    global $con;
+    $task_status='completed';
+    foreach ($comp_ids as $comp_id) {
+        $comp_query = "UPDATE $table_name SET status = ? WHERE  id = ?";
+        $comp_stmt = mysqli_prepare($con, $comp_query);
+        
+        if ($comp_stmt) {
+            mysqli_stmt_bind_param($comp_stmt, 'si', $task_status ,$comp_id);
+            mysqli_stmt_execute($comp_stmt);
+            
+        } else {
+            echo "Error preparing statement: " . mysqli_error($con) . "<br>";
+        }
+        mysqli_stmt_close($comp_stmt);
+    }
+}
+
+
+if (isset($_GET['active_ids'])) {
+    $act_ids = explode(',', $_GET['active_ids']); // Split the comma-separated string into an array of IDs
+    tasksActive($table_name, $act_ids);
+}
+
+function tasksActive($table_name, $act_ids){
+    global $con;
+    $task_status='active';
+    foreach ($act_ids as $act_id) {
+        $act_query = "UPDATE $table_name SET status = ? WHERE  id = ?";
+        $act_stmt = mysqli_prepare($con, $act_query);
+        
+        if ($act_stmt) {
+            mysqli_stmt_bind_param($act_stmt, 'si', $task_status ,$act_id);
+            mysqli_stmt_execute($act_stmt);
+            
+        } else {
+            echo "Error preparing statement: " . mysqli_error($con) . "<br>";
+        }
+        mysqli_stmt_close($act_stmt);
+    }
+}
 
 ?>

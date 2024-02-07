@@ -11,8 +11,8 @@ include 'tasks_methods.php';
         <button class="task_buttons"><a href="?id=21">&#x2295; New</a></button>
         <button class="task_buttons" onclick="editTask()">&#x2190; Edit</button>
         <button class="task_buttons" onclick="deleteTasks()">&#x2716; Delete</button>
-        <button class="task_buttons">&#x2605; Active</button>
-        <button class="task_buttons">&#x2713; Completed</button>
+        <button class="task_buttons"onclick="activeTasks()">&#x2605; Active</button>
+        <button class="task_buttons" onclick="compTasks()" >&#x2713; Completed</button>
         <button class="task_buttons">&#x26A0; Alert</button>
     </div>
     <div id="tasks_list">
@@ -36,6 +36,12 @@ include 'tasks_methods.php';
                     default:
                         $priorityClass = '';
                 }
+
+                if($row['status']=='completed'){
+                    $priorityClass = 'completed';
+                }
+                
+
                 ?>
                <tr class="<?php echo $priorityClass; ?>">
                     <td rowspan="3" id="tb_checkbox"><?php  echo '<input type="checkbox" name="selectedItems[]" value="'. $row['id'] .'">'; ?></td>
@@ -49,7 +55,7 @@ include 'tasks_methods.php';
                     <td><?php echo $row['priority'] ?></td>
                     <td><?php echo $row['status'] ?></td>
                     <td><?php echo $row['created'] ?></td>
-                    <td>&#x26A0;<?php echo $row['alert'] ?></td>
+                    <td>&#x26A0; <?php echo $row['alert'] !== null ? $row['alert'] : '---- -- -- --:--:--'; ?></td>
                 </tr>
                 <tr id="spacer-row">
                 <td colspan="6"></td>
@@ -82,7 +88,7 @@ function getCheckedTaskId() {
         return null; // Return null if no checkbox is checked
     }
 
-//                                  ---DELETE FUNCTIONS---
+//                                  ---DELETE/EDIT STATUS FUNCTIONS---
 function deleteTasks() {
     var checkedTaskIds = getCheckedTaskIds();
     if (checkedTaskIds.length > 0) {
@@ -94,6 +100,27 @@ function deleteTasks() {
     }
 }
 
+function compTasks() {
+    var checkedTaskIds = getCheckedTaskIds();
+    if (checkedTaskIds.length > 0) {
+        var existingUrl = 'home.php?id=2'; // Your existing URL with the ID parameter
+        var delUrl = existingUrl + '&comp_ids=' + checkedTaskIds.join(','); // Join the array of IDs into a comma-separated string
+        window.location.href = delUrl;
+    } else {
+        alert('Please select tasks to mark completed.');
+    }
+}
+
+function activeTasks() {
+    var checkedTaskIds = getCheckedTaskIds();
+    if (checkedTaskIds.length > 0) {
+        var existingUrl = 'home.php?id=2'; // Your existing URL with the ID parameter
+        var delUrl = existingUrl + '&active_ids=' + checkedTaskIds.join(','); // Join the array of IDs into a comma-separated string
+        window.location.href = delUrl;
+    } else {
+        alert('Please select tasks to mark active.');
+    }
+}
 function getCheckedTaskIds() {
     var checkboxes = document.getElementsByName('selectedItems[]');
     var checkedIds = [];
@@ -104,5 +131,6 @@ function getCheckedTaskIds() {
     }
     return checkedIds;
 }
+
 
 </script>

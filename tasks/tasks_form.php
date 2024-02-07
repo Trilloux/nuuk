@@ -8,7 +8,7 @@ include 'tasks_methods.php';
 
 <div id="task_form_wrapper">
     <div id="task_form_header">
-    <span>Create Task</span>
+    <span>Task information</span>
     </div>
 <form method="POST" action="" id="task_form">
     <label>Title</label>
@@ -16,7 +16,7 @@ include 'tasks_methods.php';
     <label>Description</label>
         <textarea id="task_description" name="description" required><?php echo $edit_descr; ?></textarea>
     <label>Alert on</label>
-    <input type="datetime-local" name="alert" id="task_alert" required value="<?php echo $edit_alert; ?>">
+    <input type="datetime-local" name="alert" id="task_alert"  value="<?php echo $edit_alert; ?>">
     <label>Priority</label>
         <select name="priority" id="task_priority">
             <option value="high" <?php echo ($edit_priority === 'high') ? 'selected' : ''; ?>>High</option>

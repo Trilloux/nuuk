@@ -77,26 +77,41 @@ $upd_query = "UPDATE users SET username = ?, password = ?, firstName = ?, lastNa
     }    
 }
 
-//Delete user function
-function deleteUser($deleteId) {
-    global $con;
-    $del_query = 'DELETE FROM users WHERE id = ?';
-    $del_stmt = mysqli_prepare($con, $del_query);
-    mysqli_stmt_bind_param($del_stmt, 'i', $deleteId);
-    mysqli_stmt_execute($del_stmt);
-
-    if (mysqli_stmt_affected_rows($del_stmt) > 0) {
-        echo "User deleted!";
-    } else {
-        echo "Error deleting user.";
-        echo $deleteId;
-    }
-}
-//get id of user to delete, pass the id to deleteUser function
+// Handle user deletion request
 if (isset($_POST['delete_id'])) {
     $deleteId = $_POST['delete_id'];
-    // Izsaukt deleteUser funkciju, nododot tai dzēšanas ID
     deleteUser($deleteId);
 }
 
+// Function to delete user and associated tables
+function deleteUser($deleteId) {
+    global $con;
+    
+    // Attempt to delete associated tasks first
+    $table_name = 'user_' . $deleteId . '_tasks';
+    $del_table_query = 'DROP TABLE IF EXISTS ' . $table_name;
+    $del_table_result = mysqli_query($con, $del_table_query);
+    
+    if ($del_table_result) {
+        echo "Associated tasks table deleted!";
+        // Now delete the user
+        $del_user_query = 'DELETE FROM users WHERE id = ?';
+        $del_user_stmt = mysqli_prepare($con, $del_user_query);
+        mysqli_stmt_bind_param($del_user_stmt, 'i', $deleteId);
+        mysqli_stmt_execute($del_user_stmt);
+        $user_deleted = mysqli_stmt_affected_rows($del_user_stmt) > 0;
+        mysqli_stmt_close($del_user_stmt);
+        
+        if ($user_deleted) {
+            echo "User deleted!";
+        } else {
+            echo "Error deleting user.";
+        }
+    } else {
+        echo "Error deleting associated tasks table: " . mysqli_error($con);
+    }
+}
+
 ?>
+
+

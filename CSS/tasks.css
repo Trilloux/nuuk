@@ -37,8 +37,8 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
 }
 #task_block {
    margin-top: 2%;
@@ -51,7 +51,8 @@
     color: white;
     border-radius: 5px;
     border: 1.5px solid white !important;
-    max-width: 90%;
+    max-width: 15vw;
+    padding: 2px;
 }
 #tasks{
     border:1px solid white !important;
@@ -70,13 +71,17 @@
     background-color: white;
 }
 .high-priority{
-    background-color: lightcoral !important;
+    background-color: lightcoral ;
 }
 .medium-priority{
-    background-color: #FFA824 !important;
+    background-color: #FFA824 ;
 }
 .low-priority{
-    background-color: lightseagreen !important;
+    background-color: lightseagreen ;
+}
+
+.completed{
+    background-color: lightgrey !important ;
 }
 #task_form_wrapper{
     width: 90%;

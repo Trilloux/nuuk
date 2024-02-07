@@ -48,7 +48,7 @@ include 'admin_methods_user.php';
         console.log("Confirmed");
         //Execute deleteUser function from admin_methods_user.php using Ajax
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'admin/admin_methods_user.php', true);
+        xhr.open('POST', 'Admin/admin_methods_user.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (xhr.status === 200) {
