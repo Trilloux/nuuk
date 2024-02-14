@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('UTC');
 include 'database.php';
 //Get user info from session
 if (isset($_SESSION['id'])) {
@@ -19,7 +20,7 @@ function findTable($table_name){
         createTable($table_name);
     }
 }
-
+//Create Task table in DB function
 function createTable($table_name){
     global $con;
     $crTab_query = "CREATE TABLE IF NOT EXISTS $table_name (
@@ -31,7 +32,7 @@ function createTable($table_name){
         description TEXT,
         priority ENUM ('low', 'medium', 'high') DEFAULT 'medium',
         status ENUM('active', 'completed') DEFAULT 'active',  -- Enclose 'completed' in single quotes
-        alert DATETIME DEFAULT CURRENT_TIMESTAMP,
+        alert DATETIME DEFAULT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id)  -- Correct the foreign key declaration
     )";
     
@@ -42,7 +43,7 @@ function createTable($table_name){
         echo 'Table exists';
     }
 }
-
+//Display info from task table in form(if edit)
 if(isset($_GET['task_id'])) {
     $task_id = mysqli_real_escape_string($con, $_GET['task_id']);
     $selTask_query = "SELECT * FROM $table_name WHERE id = ?";
@@ -58,7 +59,7 @@ if(isset($_GET['task_id'])) {
         $edit_priority = $row['priority'];
     }
 }
-
+//Create and update variables
 if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
     // Create new variables from form input fields when form is submitted
     $task_title = mysqli_real_escape_string($con, $_POST['title']);
@@ -75,6 +76,7 @@ if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
         updateTask($table_name, $task_id, $task_title, $task_descr, $task_priority, $task_alert);
     }
 }
+//Create Task function
 function postTask($table_name, $user_id, $task_by, $task_title, $task_descr, $task_priority, $task_alert) {
     global $con;
     
@@ -92,6 +94,7 @@ function postTask($table_name, $user_id, $task_by, $task_title, $task_descr, $ta
         echo 'Error preparing statement: ' . mysqli_error($con);
     }
 }
+//Update task function
 function updateTask($table_name, $task_id, $task_title, $task_descr, $task_priority, $task_alert) {
     global $con;
     $updTask_query = "UPDATE $table_name SET title = ?, description = ?, priority = ?, alert = ? WHERE id = ?";
@@ -108,6 +111,7 @@ function updateTask($table_name, $task_id, $task_title, $task_descr, $task_prior
     }
 }
 
+//Delete task function
 if (isset($_GET['delete_ids'])) {
     $del_ids = explode(',', $_GET['delete_ids']); // Split the comma-separated string into an array of IDs
     deleteTasks($table_name, $del_ids);
@@ -131,7 +135,7 @@ function deleteTasks($table_name, $del_ids) {
     }
 }
 
-
+//Mark task as completed function
 if (isset($_GET['comp_ids'])) {
     $comp_ids = explode(',', $_GET['comp_ids']); // Split the comma-separated string into an array of IDs
     tasksCompl($table_name, $comp_ids);
@@ -155,7 +159,7 @@ function tasksCompl($table_name, $comp_ids){
     }
 }
 
-
+//Mark task as active function
 if (isset($_GET['active_ids'])) {
     $act_ids = explode(',', $_GET['active_ids']); // Split the comma-separated string into an array of IDs
     tasksActive($table_name, $act_ids);

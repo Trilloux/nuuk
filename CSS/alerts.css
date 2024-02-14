@@ -1,0 +1,61 @@
+#alerts_wrapper{
+    width: 85%;
+    margin-top: 5%;
+    color: #FFA824;
+}
+
+@keyframes vibrate {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-1px); }
+    50% { transform: translateX(1px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(1px); }
+}
+
+.alerts_heading{
+    animation: vibrate 0.35s infinite; /* Animation duration is 0.3s */
+    animation-delay: 0s; /* Start the animation immediately */
+    animation-iteration-count: 2; /* Run the animation 5 times */
+}
+
+
+#task_alerts{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.alert_block{
+    padding-top: 2%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 10vw;
+    background-color: #f3f3f3;
+    border-radius: 15px;
+    transition: text-shadow 0.3s ease;
+    text-align: center;
+    font-size: 1.35vw;
+    color:black;
+    font-weight: 500;
+    
+}
+.alert-line {
+    border-top: 3px solid #FFA824;
+    margin-top: 3%; /* Adjust margin as needed */
+    
+}
+.alert-title{
+    font-weight: 700;
+    color:black;
+}
+.alert-author{
+    font-weight: 700;
+    color: #FFA824;
+}
+.alert_block:hover{
+    transform: scale(1.02); 
+}

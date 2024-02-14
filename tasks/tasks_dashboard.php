@@ -13,7 +13,6 @@ include 'tasks_methods.php';
         <button class="task_buttons" onclick="deleteTasks()">&#x2716; Delete</button>
         <button class="task_buttons"onclick="activeTasks()">&#x2605; Active</button>
         <button class="task_buttons" onclick="compTasks()" >&#x2713; Completed</button>
-        <button class="task_buttons">&#x26A0; Alert</button>
     </div>
     <div id="tasks_list">
         <div id="task_block">
@@ -23,6 +22,7 @@ include 'tasks_methods.php';
                 $shwTab_result=mysqli_query($con, $shwTab_query);
                 while($row=mysqli_fetch_array($shwTab_result)){
                     $priorityClass = '';
+                //                               --- Switch to get priority class for CSS  ----
                 switch ($row['priority']) {
                     case 'high':
                         $priorityClass = 'high-priority';
@@ -41,7 +41,6 @@ include 'tasks_methods.php';
                     $priorityClass = 'completed';
                 }
                 
-
                 ?>
                <tr class="<?php echo $priorityClass; ?>">
                     <td rowspan="3" id="tb_checkbox"><?php  echo '<input type="checkbox" name="selectedItems[]" value="'. $row['id'] .'">'; ?></td>
@@ -67,6 +66,8 @@ include 'tasks_methods.php';
 </div>
 
 <script>
+//                                ----Javascript functions to get checkboxes ids----
+
 //                                  ---EDIT FUNCTIONS---
 function editTask() {
     var checkedTaskId = getCheckedTaskId();

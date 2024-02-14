@@ -130,7 +130,25 @@ body{
     margin-bottom: 6%;
     border: none;
     background: transparent;
-    
+}
+#alerts_button{
+ position: relative;
+}
+#alerts_button img{
+  z-index: 1;
+  width: 100%;
+
+}
+#alert_count{
+  z-index: 2;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left:72%;
+  top: 48%;
+  color: red;
+  font-size: 1.4vw;
+  font-weight: 600;
+  
 }
 #logout_button{
 margin-top: auto;

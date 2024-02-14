@@ -25,7 +25,11 @@ if (!isset($_SESSION["id"])) {
 		   <link rel="stylesheet" href="CSS/admin_dashboard.css">
 		   <link rel="stylesheet" href="CSS/create_edit_user.css">
 		   <link rel="stylesheet" href="CSS/tasks.css">
+		   <link rel="stylesheet" href="CSS/alerts.css">
 		   <script src="JS/onload_home.js"></script>
+		   <script src="JS/user_alerts.js"></script>
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 	</head>
 	<body>
 		<div id="wrapper">
@@ -55,7 +59,7 @@ if (!isset($_SESSION["id"])) {
 					<button class="cp_button"><a href="?id=2"><img src="PIC/tasks.png" alt=""></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/calendar.png" alt=""></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/messages.png" alt=""></a></button>
-					<button class="cp_button"><a href=""><img src="PIC/alerts.png" alt=""></a></button>
+					<button class="cp_button" id="alerts_button"><a href="?id=5" id="alerts_image"><img src="PIC/alerts.png" alt=""><span id="alert_count">0</span></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/files.png" alt=""></a></button>
 					<button id="logout_button"><a href="logout.php" class="link"><span id="std_icon">&#9212;</span> Logout</a></button>
 				</div>
@@ -87,6 +91,9 @@ if (!isset($_SESSION["id"])) {
 					}
 					if($_GET['id']==21){
 						include 'tasks/tasks_form.php';
+					}
+					if($_GET['id']==5){
+						include 'alerts/alerts_dashboard.php';
 					}
 					?>
 				</div>
