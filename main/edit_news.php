@@ -5,7 +5,9 @@ if (!isset($_SESSION['id'])) {
 }
 include 'Admin/admin_methods_news.php';
 ?>
-
+<div id="existing_news">
+    <h2>Existing news posts</h2>
+</div>
 <div id="news_list">
     <table>
         <tr>

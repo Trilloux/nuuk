@@ -45,8 +45,8 @@
         font-size: 0.8vw;
     }
     
-    #user_list{
-    margin-top: 8%;
+    #existing_users{
+    margin-top: 5%;
     }
 
     #edit_userlist {
@@ -56,5 +56,9 @@
     
     a:visited #edit_userlist {
         color: black;
+    }
+
+    h2{
+        color: #FFA824;
     }
     

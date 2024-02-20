@@ -27,13 +27,14 @@ function getTaskAlerts() {
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            console.log(response);
+            // Konsolē paziņojumu noņemts
         },
         error: function(xhr, status, error) {
-            console.error('Kļūda veicot AJAX pieprasījumu:', error);
+            // Kļūdas paziņojumu noņemts
         }
     });
 }
+
 
 
 function loadDoc() {

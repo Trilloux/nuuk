@@ -5,6 +5,10 @@ if (!isset($_SESSION['id'])) {
 }
 include 'admin_methods_user.php';
 ?>
+
+    <div id="existing_users">
+        <h2>Existing users</h2>
+    </div>
     <div id="user_list">
         <table>
             <tr>

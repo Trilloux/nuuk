@@ -1,0 +1,25 @@
+.task_display{
+    display: flex;
+    flex-direction: column;
+
+}
+
+#existing_tasks{
+    margin-top: 5%;
+}
+
+.users_name{
+    color:#FFA824;
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+
+.user_field{
+    min-width: 100% !important;
+    border-bottom: 2px dashed #FFA824;
+    margin-bottom: 2%;
+}
+
+table{
+    width: 100% !important;
+}

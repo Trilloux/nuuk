@@ -8,7 +8,7 @@ if(isset($_COOKIE['current_time'])) {
 
 function getTaskAlerts($user_id) {
     global $con, $current_time;
-    $alert_query = "SELECT title, description, created_by, alert FROM user_" . $user_id . "_tasks WHERE alert <= ? AND status = 'active'";
+    $alert_query = "SELECT title, description, created_by, alert FROM user_" . $user_id . "_tasks WHERE (alert <= ? OR (alert IS NULL AND created_by IN (SELECT firstName FROM users WHERE role = 'admin'))) AND status = 'active'";
     $alert_stmt = mysqli_prepare($con, $alert_query);
     mysqli_stmt_bind_param($alert_stmt, 's', $current_time);
     mysqli_stmt_execute($alert_stmt);
@@ -24,11 +24,9 @@ function getTaskAlerts($user_id) {
         $intAlert = (int) $numericAlert;
         $numericTime = preg_replace('/[^0-9]/', '', $current_time);
         $intTime = (int) $numericTime;
-        if ($intTime> $intAlert) {
+        if ($intTime> $intAlert || $row['alert'] == NULL) {
             $description = strlen($row['description']) > 250 ? substr($row['description'], 0, 250) . '...' : $row['description'];
             $tasks[] ='<span class="alert-title">'.$row['title'].'</span><br>'.$description . '<br>' .'<span class="alert-author">'.$row['created_by'].'</span><br><hr class="alert-line">';
-
-
         }
     }
     return $tasks;

@@ -1,7 +1,7 @@
 h1{
 color: #FFA824;
 }
-div #user_actions, #news_actions{
+div #user_actions, #news_actions, #task_actions{
     border-bottom: 2px dashed  #FFA824;
 }
 .admin_buttons{

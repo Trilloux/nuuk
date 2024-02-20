@@ -50,7 +50,7 @@ include 'tasks_methods.php';
                 <td colspan="5"><?php echo $row['description'] ?></td>
                 </tr>
                 <tr class="<?php echo $priorityClass; ?>">
-                    <td><?php echo $_SESSION['firstName'] ?></td>
+                    <td><?php echo $row['created_by'] ?></td>
                     <td><?php echo $row['priority'] ?></td>
                     <td><?php echo $row['status'] ?></td>
                     <td><?php echo $row['created'] ?></td>

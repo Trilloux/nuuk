@@ -183,4 +183,28 @@ function tasksActive($table_name, $act_ids){
     }
 }
 
+
+
+//Function to remove alert
+if(isset($_POST['submit_alert'])){
+    setAlertToDefault($table_name, $task_id);
+}
+
+function setAlertToDefault($table_name, $task_id) {
+    global $con; // Pārliecinieties, vai $con ir pieejams šajā failā
+    $default_alert =NULL;
+    $update_alert_query = "UPDATE $table_name SET alert = ? WHERE id = ?";
+    $update_alert_stmt = mysqli_prepare($con, $update_alert_query);
+    if ($update_alert_stmt) {
+        mysqli_stmt_bind_param($update_alert_stmt, 'si', $default_alert, $task_id);
+        if (mysqli_stmt_execute($update_alert_stmt)) {
+            echo 'Alert removed!';
+        } else {
+            echo 'Error executing statement: ' . mysqli_stmt_error($update_alert_stmt);
+        }
+    } else {
+        echo 'Error preparing statement: ' . mysqli_error($con);
+    }
+}
 ?>
+

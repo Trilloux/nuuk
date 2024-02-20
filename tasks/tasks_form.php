@@ -16,7 +16,9 @@ include 'tasks_methods.php';
     <label>Description</label>
         <textarea id="task_description" name="description" required><?php echo $edit_descr; ?></textarea>
     <label>Alert on</label>
-    <input type="datetime-local" name="alert" id="task_alert"  value="<?php echo $edit_alert; ?>">
+    <input type="datetime-local" name="alert" id="task_alert" value="<?php echo isset($edit_alert) ? $edit_alert : ''; ?>">
+    <input type="submit" name="submit_alert" value="Remove alert" id="remove_alert">
+</script>
     <label>Priority</label>
         <select name="priority" id="task_priority">
             <option value="high" <?php echo ($edit_priority === 'high') ? 'selected' : ''; ?>>High</option>

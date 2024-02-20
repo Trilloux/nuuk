@@ -17,4 +17,16 @@ include '../database.php';
         <button class="admin_buttons"><a href="?id=admin_3">Create New Post</a></button>
         <button class="admin_buttons"><a href="?id=admin_4">Edit/Delete Posts</a></button>
     </div>
+    <div id="task_actions">
+        <h2>Task actions</h2>
+        <p>All information regarding workspace task section. Create new tasks, fallow current task progress.</p>
+        <button class="admin_buttons"><a href="?id=admin_5">Create New Task</a></button>
+        <button class="admin_buttons"><a href="?id=admin_6">Show current tasks</a></button>
+    </div>
+    <div id="calendar_actions">
+        <h2>Calendar actions</h2>
+        <p>All information regarding workspace calendar section. Create new calendar events or edit/delete existing events.</p>
+        <button class="admin_buttons"><a href="?id=admin_7">Show Calendar Events</a></button>
+    </div>
+    
 </div>

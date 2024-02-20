@@ -1,0 +1,61 @@
+#calendar{
+    margin-top: 8%;
+    min-width: 90%;
+    z-index: 3;
+}
+
+.fc-event {
+background-color: #FFA824;
+min-height: 1.5vw;
+font-size: 0.8vw;
+text-align: center;
+word-wrap: break-word;
+white-space: normal;
+font-family: Mono, monospace;
+}
+
+
+#eventFormContainer{
+    margin-top:2%;
+ 
+}
+
+
+#eventForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFA824;
+    font-family: Mono, monospace;
+}
+
+#eventForm input{
+    width: 25vw;
+    min-height: 2vw;
+    text-align: center;
+    border: 1px solid #FFA824;
+}
+
+#eventForm label{
+    margin-bottom: 2%;
+    margin-top: 2%;
+
+}
+
+#event_button{
+    border: none;
+    border-radius: 15px;
+    width: 7vw;
+    height: 2.5vw;
+    margin-top: 4%;
+    background-color: #FFA824;
+    color: white;
+    font-size: 1vw;
+    font-weight: 700;
+    cursor: pointer;
+}
+#event_button:hover{
+box-shadow: 0 16px 16px 0 rgba(0,0,0,0.2), 0 16px 20px 10px rgba(0,0,0,0.19); 
+transform: scale(1);
+}

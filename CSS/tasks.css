@@ -104,6 +104,22 @@
 input[type="datetime-local"]{
     width: 25% !important;
     align-items: center;
+    margin-bottom: 0;
+}
+#remove_alert{
+    display: inline-block;
+    max-width: 20% !important;
+  
+    color: #FFA824;
+    background-color: white;
+    border: none !important;
+    font-size: 1vw;
+    cursor: pointer;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    max-height: 1.2vw !important;
+   margin-top: -1.25% !important;
+   cursor: pointer;
 }
 #task_form textarea{
     width: 90%;

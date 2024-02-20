@@ -7,7 +7,8 @@ if (!isset($_SESSION["id"])) {
     header("Location: index.php");
     exit();
 }
-// Proceed to the rest of the content on the home.php page
+header("Access-Control-Allow-Origin: *");
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,8 @@ if (!isset($_SESSION["id"])) {
 		   <link rel="stylesheet" href="CSS/create_edit_user.css">
 		   <link rel="stylesheet" href="CSS/tasks.css">
 		   <link rel="stylesheet" href="CSS/alerts.css">
+		   <link rel="stylesheet" href="CSS/admin_tasks.css">
+		   <link rel="stylesheet" href="CSS/calendar.css">
 		   <script src="JS/onload_home.js"></script>
 		   <script src="JS/user_alerts.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -57,7 +60,7 @@ if (!isset($_SESSION["id"])) {
     			<div id="control_panel">
 					<button class="cp_button"><a href="?id=1"><img src="PIC/main.png" alt=""></a></button>
 					<button class="cp_button"><a href="?id=2"><img src="PIC/tasks.png" alt=""></a></button>
-					<button class="cp_button"><a href=""><img src="PIC/calendar.png" alt=""></a></button>
+					<button class="cp_button"><a href="?id=3"><img src="PIC/calendar.png" alt=""></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/messages.png" alt=""></a></button>
 					<button class="cp_button" id="alerts_button"><a href="?id=5" id="alerts_image"><img src="PIC/alerts.png" alt=""><span id="alert_count">0</span></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/files.png" alt=""></a></button>
@@ -75,10 +78,19 @@ if (!isset($_SESSION["id"])) {
 						include 'Admin/edit_user.php';
 					}
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_3' && $_SESSION['role'] == 'admin'){
-						include 'main/news_form.php';
+						include 'main/create_news.php';
 					}
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_4' && $_SESSION['role'] == 'admin'){
 						include 'main/edit_news.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_5' && $_SESSION['role'] == 'admin'){
+						include 'Admin/create_task.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_6' && $_SESSION['role'] == 'admin'){
+						include 'Admin/given_tasks.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_7' && $_SESSION['role'] == 'admin'){
+						include 'Admin/admin_calendar.php';
 					}
 					if($_GET['id']=='edit_id'){
 						include 'edit_profile.php';
@@ -94,6 +106,9 @@ if (!isset($_SESSION["id"])) {
 					}
 					if($_GET['id']==5){
 						include 'alerts/alerts_dashboard.php';
+					}
+					if($_GET['id']==3){
+						include 'calendar/calendar.php';
 					}
 					?>
 				</div>
