@@ -81,9 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
       data: eventData,
       success: function(response) {
         alert('Event added successfully!');
+        location.reload();
         $('#eventFormContainer').hide();
         // Atjauno kalendāru, lai parādītu jauno notikumu
         calendar.refetchEvents();
+       
       },
       error: function(xhr, status, error) {
         console.error('Error adding event:', error);

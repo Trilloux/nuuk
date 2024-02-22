@@ -1,18 +1,25 @@
 #calendar{
     margin-top: 8%;
-    min-width: 90%;
+    min-width: 95%;
     z-index: 3;
 }
 
 .fc-event {
 background-color: #FFA824;
 min-height: 1.5vw;
-font-size: 0.8vw;
+font-size: 0.9vw;
 text-align: center;
 word-wrap: break-word;
 white-space: normal;
 font-family: Mono, monospace;
+font-weight: 550;
 }
+
+.fc-event:hover{
+box-shadow: 0 16px 16px 0 rgba(0,0,0,0.2), 0 16px 20px 10px rgba(0,0,0,0.19); 
+transform: scale(1.1);
+}
+
 
 
 #eventFormContainer{

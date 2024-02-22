@@ -47,5 +47,45 @@ function displayDashboard($user_id) {
         echo "You currently have no alerts!";
     }
 }
+
+function displayEvents() {
+    // Call getTaskAlerts function to retrieve events
+    $getEvents = getCalendarAlerts();
+    
+    // If there are events, display them
+    if (!empty($getEvents)) {
+        // Loop through events and display them
+        foreach ($getEvents as $event) {
+            // Display each event
+            echo "<div style='width:100%;'>$event</div><br>";
+        }
+    } else {
+        // If there are no events, display a message
+        echo "You currently have no events!";
+    }
+}
+
+
+function getCalendarAlerts(){
+    global $con; 
+    $dateNow = date('Y-m-d');
+    $cal_query = "SELECT * FROM events WHERE startDate <= ? AND endDate >= ?";
+    $cal_stmt = mysqli_prepare($con, $cal_query);
+    mysqli_stmt_bind_param($cal_stmt, 'ss', $dateNow, $dateNow); // Bind both parameters
+    mysqli_stmt_execute($cal_stmt);
+    $result = mysqli_stmt_get_result($cal_stmt);
+    
+    // Pārbauda, vai ir kļūdas
+    if(!$result){
+        die('Query error: '.mysqli_error($con));
+    }
+
+    $events=[];
+    while($row=mysqli_fetch_array($result)){
+        $events[] = '<span class="alert-title">'.$row['name'].'</span><br>'.'<span class="alert-author">'.$row['startDate'].' -- '.$row['endDate'].'</span><br><hr class="alert-line">';
+        
+    }
+    return $events;
+}
 ?>
 

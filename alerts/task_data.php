@@ -27,15 +27,43 @@ function getTaskAlerts($user_id) {
         $intAlert = (int) $numericAlert;
         $numericTime = preg_replace('/[^0-9]/', '', $current_time);
         $intTime = (int) $numericTime;
-        if ($intTime> $intAlert /*|| $row['alert'] == NULL */) {
+        if ($intTime> $intAlert) {
             $description = strlen($row['description']) > 250 ? substr($row['description'], 0, 250) . '...' : $row['description'];
             $tasks[] ='<span class="alert-title">'.$row['title'].'</span><br>'.$description . '<br>' .'<span class="alert-author">'.$row['created_by'].'</span><br><hr class="alert-line">';
             $task_count++;
         }
     }
-    if($task_count != '0'){
+    /*if($task_count != '0'){
+        echo $task_count;
+    }
+    */
+    getCalendarAlerts($task_count);
+}
+
+function getCalendarAlerts($task_count){
+    global $con; 
+    $dateNow = date('Y-m-d');
+    $cal_query = "SELECT * FROM events WHERE startDate <= ? AND endDate >= ?";
+    $cal_stmt = mysqli_prepare($con, $cal_query);
+    mysqli_stmt_bind_param($cal_stmt, 'ss', $dateNow, $dateNow); // Bind both parameters
+    mysqli_stmt_execute($cal_stmt);
+    $result = mysqli_stmt_get_result($cal_stmt);
+    
+    // Pārbauda, vai ir kļūdas
+    if(!$result){
+        die('Query error: '.mysqli_error($con));
+    }
+
+    $events=[];
+    while($row=mysqli_fetch_array($result)){
+        $events[] = '<span>'.$row['name'].'<br>'.$row['startDate'].' -- '.$row['endDate'].'</span><br><hr class="alert-line">';
+        $task_count++;
+    }
+    if($task_count > 0 ){
         echo $task_count;
     }
 }
+
+
 
 ?>

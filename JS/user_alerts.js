@@ -50,4 +50,4 @@ function loadDoc() {
     xhttp.send();
 }
 
-setInterval(loadDoc, 1); // Pārbaudīt ik pēc 10 sekundēm
+setInterval(loadDoc, 1); // Pārbaudīt ik pēc 1 sekundēm

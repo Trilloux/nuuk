@@ -5,6 +5,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 include 'alert_methods.php';
+
 $user_id = $_SESSION['id'];
 ?>
 
@@ -26,15 +27,19 @@ $user_id = $_SESSION['id'];
             <h2 class="alerts_heading">Calendar alerts</h2>
         </div>
         <div class="alert_block">
+            <?php
+            displayEvents();
+            ?>
         </div>
     </div>
 </div>
 
 <script>
-    // Uzstāda lapas pārlādi pēc 5 minūtēm
-        setTimeout(function() {
-            location.reload();
-        }, 5 * 60 * 1000); // 5 minūtes * 60 sekundes * 1000 milisekundes
+   // Uzstāda lapas pārlādi pēc 1 minūtes
+setTimeout(function() {
+    location.reload();
+}, 1 * 60 * 1000); // 1 minūte
+
 
         setInterval(function() {
     displayTime();

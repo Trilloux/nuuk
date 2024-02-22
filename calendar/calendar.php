@@ -38,4 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+    // Uzstāda lapas pārlādi pēc 1 minūtes
+setTimeout(function() {
+    location.reload();
+}, 1 * 60 * 1000); // 1 minūte
+
 </script>
