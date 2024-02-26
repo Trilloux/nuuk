@@ -23,24 +23,27 @@ document.addEventListener("DOMContentLoaded", function() {
         welcomeText.style.transform = "translateY(0)"; // no more movement
     }
 
+    // Save scroll position before unloading
+    window.onbeforeunload = function(e) {
+        localStorage.setItem("scrollpos", window.scrollY);
+    };
+    // Restore scroll position on DOMContentLoaded
+    var scrollpos = localStorage.getItem("scrollpos");
+    if (scrollpos) window.scrollTo(0, scrollpos);
+
     // Add event listener to logout button
     var logoutButton = document.getElementById("logout_button");
-    if (logoutButton) {
         logoutButton.addEventListener("click", function() {
-            // Delete the welcome text permanently
-            localStorage.removeItem("animationCompleted");
-        });
-    }
-});
-//             !----------Function to keep te scrolled position if page reloaded or included different document----!
-        document.addEventListener("DOMContentLoaded", function(event) { 
-            var scrollpos = localStorage.getItem('scrollpos');
-            if (scrollpos) window.scrollTo(0, scrollpos);
-        });
+            localStorage.removeItem("animationCompleted"); 
+            //localStorage.removeItem("scrollpos"); not working IDK why
+            window.scrollTo(0, 0); // Scroll to top
 
-        window.onbeforeunload = function(e) {
-            localStorage.setItem('scrollpos', window.scrollY);
-        };
+            
+        });
     
+    
+});
 
 
+
+    
