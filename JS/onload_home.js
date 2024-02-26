@@ -23,25 +23,22 @@ document.addEventListener("DOMContentLoaded", function() {
         welcomeText.style.transform = "translateY(0)"; // no more movement
     }
 
+    // Restore scroll position on DOMContentLoaded
+    var scrollpos = localStorage.getItem("scrollpos");
+    if (scrollpos) window.scrollTo(0, parseInt(scrollpos));
+
     // Save scroll position before unloading
     window.onbeforeunload = function(e) {
         localStorage.setItem("scrollpos", window.scrollY);
     };
-    // Restore scroll position on DOMContentLoaded
-    var scrollpos = localStorage.getItem("scrollpos");
-    if (scrollpos) window.scrollTo(0, scrollpos);
-
+    
     // Add event listener to logout button
-    var logoutButton = document.getElementById("logout_button");
-        logoutButton.addEventListener("click", function() {
-            localStorage.removeItem("animationCompleted"); 
-            //localStorage.removeItem("scrollpos"); not working IDK why
-            window.scrollTo(0, 0); // Scroll to top
-
-            
-        });
-    
-    
+    var logoutButton = document.getElementById("logout_link");
+    logoutButton.addEventListener("click", function() {
+        localStorage.removeItem("animationCompleted");
+        //localStorage.removeItem("scrollpos");
+        window.scrollTo (0, 0);
+    });
 });
 
 
