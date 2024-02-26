@@ -25,8 +25,9 @@ include '../database.php';
     </div>
     <div id="calendar_actions">
         <h2>Calendar actions</h2>
-        <p>All information regarding workspace calendar section. Create new calendar events or view existing events.</p>
+        <p>All information regarding workspace calendar section. Create new calendar events or edit/delete existing events.</p>
         <button class="admin_buttons"><a href="?id=admin_7">Create Event</a></button>
+        <button class="admin_buttons"><a href="?id=admin_8">Edit/Delete Event</a></button>
     </div>
     
 </div>

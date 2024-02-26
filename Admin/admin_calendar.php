@@ -8,11 +8,11 @@
 <div id="eventFormContainer" style="display: none;">
     <form id="eventForm">
         <label>Event Name:</label>
-        <input type="text" name="eventName" placeholder="Event name">
+        <input type="text" name="eventName" placeholder="Event name" required>
         <label>Event Start:</label>
-        <input type="text" name="eventStartDate" id="eventStartDate">
+        <input type="text" name="eventStartDate" id="eventStartDate" required>
         <label>Event End:</label>
-        <input type="text" name="eventEndDate" id="eventEndDate">
+        <input type="text" name="eventEndDate" id="eventEndDate" required>
         <button type="submit" id="event_button">Add Event</button>
     </form>
 </div>
@@ -92,6 +92,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
 
 </script>

@@ -1,0 +1,30 @@
+#existing_events{
+    margin-top: 5%;
+}
+
+#edit_eventlist {
+    text-decoration: none;
+    color: initial; 
+}
+a:visited #edit_eventlist {
+    color: black;
+}
+.cut_text_cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 14vw;
+}
+
+td#event_title {
+    min-width: 25vw !important;
+}
+
+td.event_dates{
+    min-width: 7vw !important;
+}
+
+.event_button{
+margin-top: 3%;
+min-width: 7vw !important;
+}

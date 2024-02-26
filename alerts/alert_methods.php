@@ -69,7 +69,7 @@ function displayEvents() {
 function getCalendarAlerts(){
     global $con; 
     $dateNow = date('Y-m-d');
-    $cal_query = "SELECT * FROM events WHERE startDate <= ? AND endDate >= ?";
+    $cal_query = "SELECT * FROM events WHERE startDate <= ? AND endDate > ?";
     $cal_stmt = mysqli_prepare($con, $cal_query);
     mysqli_stmt_bind_param($cal_stmt, 'ss', $dateNow, $dateNow); // Bind both parameters
     mysqli_stmt_execute($cal_stmt);
