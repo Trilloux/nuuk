@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var logoutButton = document.getElementById("logout_link");
     logoutButton.addEventListener("click", function() {
         localStorage.removeItem("animationCompleted");
-        //localStorage.removeItem("scrollpos");
+      //Scroll page to top when logging out 
         window.scrollTo (0, 0);
     });
 });

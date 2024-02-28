@@ -13,9 +13,7 @@ function getTaskAlerts($user_id) {
     mysqli_stmt_bind_param($alert_stmt, 's', $current_time);
     mysqli_stmt_execute($alert_stmt);
     $result = mysqli_stmt_get_result($alert_stmt);
-    if (!$result) {
-        die('Query error: ' . mysqli_error($con));
-    }
+    
     $tasks = [];
     while($row = mysqli_fetch_array($result)) {
         // Pārbaudiet, vai pašreizējais laiks ir lielāks par alerta laiku

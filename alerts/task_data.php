@@ -16,9 +16,7 @@ function getTaskAlerts($user_id) {
     mysqli_stmt_bind_param($alert_stmt, 's', $current_time);
     mysqli_stmt_execute($alert_stmt);
     $result = mysqli_stmt_get_result($alert_stmt);
-    if (!$result) {
-        die('Query error: ' . mysqli_error($con));
-    }
+   
     $tasks = [];
     while($row = mysqli_fetch_array($result)) {
         // Pārbaudiet, vai pašreizējais laiks ir lielāks par alerta laiku
@@ -48,12 +46,7 @@ function getCalendarAlerts($task_count){
     mysqli_stmt_bind_param($cal_stmt, 'ss', $dateNow, $dateNow); // Bind both parameters
     mysqli_stmt_execute($cal_stmt);
     $result = mysqli_stmt_get_result($cal_stmt);
-    
-    // Pārbauda, vai ir kļūdas
-    if(!$result){
-        die('Query error: '.mysqli_error($con));
-    }
-
+        
     $events=[];
     while($row=mysqli_fetch_array($result)){
         $events[] = '<span>'.$row['name'].'<br>'.$row['startDate'].' -- '.$row['endDate'].'</span><br><hr class="alert-line">';

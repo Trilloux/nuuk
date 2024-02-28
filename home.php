@@ -30,6 +30,7 @@ header("Access-Control-Allow-Origin: *");
 		   <link rel="stylesheet" href="CSS/admin_tasks.css">
 		   <link rel="stylesheet" href="CSS/calendar.css">
 		   <link rel="stylesheet" href="CSS/admin_events.css">
+		   <link rel="stylesheet" href="CSS/messages.css">
 		   <script src="JS/onload_home.js"></script>
 		   <script src="JS/user_alerts.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -59,13 +60,13 @@ header("Access-Control-Allow-Origin: *");
 
     		<div id="container">
     			<div id="control_panel">
-					<button class="cp_button"><a href="?id=1"><img src="PIC/main.png" alt=""></a></button>
-					<button class="cp_button"><a href="?id=2"><img src="PIC/tasks.png" alt=""></a></button>
-					<button class="cp_button"><a href="?id=3"><img src="PIC/calendar.png" alt=""></a></button>
-					<button class="cp_button"><a href=""><img src="PIC/messages.png" alt=""></a></button>
-					<button class="cp_button" id="alerts_button"><a href="?id=5" id="alerts_image"><img src="PIC/alerts.png" alt=""><span id="alert_count">0</span></a></button>
-					<button class="cp_button"><a href=""><img src="PIC/files.png" alt=""></a></button>
-					<button id="logout_button"><a href="logout.php" class="link"><span id="std_icon">&#9212;</span> Logout</a></button>
+					<button class="cp_button"><a href="?id=1"><img src="PIC/main.png" alt="home"></a></button>
+					<button class="cp_button"><a href="?id=2"><img src="PIC/tasks.png" alt="tasks"></a></button>
+					<button class="cp_button"><a href="?id=3"><img src="PIC/calendar.png" alt="calendar"></a></button>
+					<button class="cp_button"><a href="?id=4"><img src="PIC/messages.png" alt="messages"></a></button>
+					<button class="cp_button" id="alerts_button"><a href="?id=5" id="alerts_image"><img src="PIC/alerts.png" alt="alerts"><span id="alert_count">0</span></a></button>
+					<button class="cp_button"><a href=""><img src="PIC/files.png" alt="files"></a></button>
+					<button id="logout_button"><a href="logout.php" class="link" id="logout_link"><span id="std_icon">&#9212;</span> Logout</a></button>
 				</div>
 				<div id="main">
 					<?php
@@ -108,12 +109,19 @@ header("Access-Control-Allow-Origin: *");
 					if($_GET['id']==21){
 						include 'tasks/tasks_form.php';
 					}
-					if($_GET['id']==5){
-						include 'alerts/alerts_dashboard.php';
-					}
 					if($_GET['id']==3){
 						include 'calendar/calendar.php';
 					}
+					if($_GET['id']==4){
+						include 'messages/messages_dashboard.php';
+					}
+					if($_GET['id']==43){
+						include 'messages/message_form.php';
+					}
+					if($_GET['id']==5){
+						include 'alerts/alerts_dashboard.php';
+					}
+					
 					?>
 				</div>
 				<div id="side_bar">

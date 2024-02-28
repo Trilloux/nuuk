@@ -87,30 +87,31 @@ if (isset($_POST['delete_id'])) {
 function deleteUser($deleteId) {
     global $con;
     
-    // Attempt to delete associated tasks first
+    // Delete tasks table
     $table_name = 'user_' . $deleteId . '_tasks';
     $del_table_query = 'DROP TABLE IF EXISTS ' . $table_name;
-    $del_table_result = mysqli_query($con, $del_table_query);
+    mysqli_query($con, $del_table_query);
+
+    // Delete messages table
+    $mesg_table_name = 'user_' . $deleteId . '_messages';
+    $del_msg_table_query = 'DROP TABLE IF EXISTS ' . $mesg_table_name;
+    mysqli_query($con, $del_msg_table_query);
+
+    // Now delete the user
+    $del_user_query = 'DELETE FROM users WHERE id = ?';
+    $del_user_stmt = mysqli_prepare($con, $del_user_query);
+    mysqli_stmt_bind_param($del_user_stmt, 'i', $deleteId);
+    mysqli_stmt_execute($del_user_stmt);
+    $user_deleted = mysqli_stmt_affected_rows($del_user_stmt) > 0;
+    mysqli_stmt_close($del_user_stmt);
     
-    if ($del_table_result) {
-        echo "Associated tasks table deleted!";
-        // Now delete the user
-        $del_user_query = 'DELETE FROM users WHERE id = ?';
-        $del_user_stmt = mysqli_prepare($con, $del_user_query);
-        mysqli_stmt_bind_param($del_user_stmt, 'i', $deleteId);
-        mysqli_stmt_execute($del_user_stmt);
-        $user_deleted = mysqli_stmt_affected_rows($del_user_stmt) > 0;
-        mysqli_stmt_close($del_user_stmt);
-        
-        if ($user_deleted) {
-            echo "User deleted!";
-        } else {
-            echo "Error deleting user.";
-        }
+    if ($user_deleted) {
+        echo "User and associated tables deleted!";
     } else {
-        echo "Error deleting associated tasks table: " . mysqli_error($con);
+        echo "Error deleting user or associated tables.";
     }
 }
+
 
 ?>
 

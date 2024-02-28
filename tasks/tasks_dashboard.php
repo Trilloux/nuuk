@@ -8,7 +8,7 @@ include 'tasks_methods.php';
 
 <div id="tasks_wrapper">
     <div id="tasks_cpanel">
-        <button class="task_buttons"><a href="?id=21">&#x2295; New</a></button>
+        <button class="task_buttons"><a href="?id=43">&#x2295; New</a></button>
         <button class="task_buttons" onclick="editTask()">&#x2190; Edit</button>
         <button class="task_buttons" onclick="deleteTasks()">&#x2716; Delete</button>
         <button class="task_buttons"onclick="activeTasks()">&#x2605; Active</button>
