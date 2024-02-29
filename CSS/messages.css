@@ -71,6 +71,8 @@
     border: none;
 }
 
+
+
 #addRecipient{
     display:inline-block;
     width: 7vw;
@@ -113,3 +115,4 @@
 .recipient{
     margin-left: 2%;
 }
+
