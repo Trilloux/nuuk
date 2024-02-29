@@ -5,8 +5,10 @@ if (isset($_SESSION['id'])) {
     $get_id = $_SESSION['id'];
     $get_name = $_SESSION['firstName'];
     $get_lastname=$_SESSION['lastName'];
-    $MsgTab_name = 'user_' . $get_id . '_messages';
+    $MsgTab_name = 'user_' . $get_id . '_inbox';
+    $SendTab_name = 'user_' . $get_id . '_outbox';
     findMsgTab($MsgTab_name);
+    findSendTab($SendTab_name);
 }
 //Find Task table for user, if user doesn't have table 
 //Create new table with user id and first name and last name
@@ -17,6 +19,14 @@ function findMsgTab($MsgTab_name){
     $getTab_result=mysqli_query($con, $getTab_query);
     if ($getTab_result->num_rows == 0) {
         createMsgTab($MsgTab_name);
+    }
+}
+function findSendTab($SendTab_name){
+    global $con;
+    $getTab_query="SHOW TABLES LIKE '$SendTab_name'";
+    $getTab_result=mysqli_query($con, $getTab_query);
+    if ($getTab_result->num_rows == 0) {
+        createSendTab($SendTab_name);
     }
 }
 //Create Task table in DB function
@@ -37,7 +47,25 @@ function createMsgTab($MsgTab_name){
     if(mysqli_num_rows($MsgTab_result) > 0){
         echo 'Table created';
     }else{
-        echo 'Table exists';
+        echo 'Inbox table exists';
+    }
+}
+function createSendTab($SendTab_name){
+    global $con;
+    $SendTab_query = "CREATE TABLE IF NOT EXISTS $SendTab_name (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        title VARCHAR(100) NOT NULL,
+        context TEXT,
+        file_path VARCHAR(255),
+        sent_by VARCHAR (50) NOT NULL,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+    
+    $SendTab_result=mysqli_query($con, $SendTab_query);
+    if(mysqli_num_rows($SendTab_result) > 0){
+        echo 'Table created';
+    }else{
+        echo 'Outbox table exists';
     }
 }
 
@@ -84,7 +112,7 @@ foreach ($recipients as $recipient_id) {
 
 function sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
     global $con;
-    $message_table = 'user_' . $recipient_id . '_messages';
+    $message_table = 'user_' . $recipient_id . '_inbox';
     $send_query="INSERT INTO $message_table (title, context, file_path, sent_by) VALUES (?,?,?,?)";
     $send_stmt = mysqli_prepare($con, $send_query);
     if($send_stmt){
