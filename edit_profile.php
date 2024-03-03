@@ -26,9 +26,9 @@ if ($profileImageResult && $row = mysqli_fetch_assoc($profileImageResult)) {
             <input type="file" id="file_input" name="profile_image" accept="image/*" onchange="previewImage(this)">
         </div>
         <label>Name:</label>
-        <input type="text" name="first_name" required value="<?php echo $edit_fname; ?>" pattern="^[A-Za-zĀ-ž]+$" title="Name must only contain letters">
+        <input type="text" name="first_name" required value="<?php echo $edit_fname; ?>" pattern="^[A-Za-zĀ-ž\s]+$" title="Name must only contain letters">
         <label>Last Name:</label>
-        <input type="text" name="last_name" required value="<?php echo $edit_lname; ?>"pattern="^[A-Za-zĀ-ž]+$" title="Last name must  only contain letters">
+        <input type="text" name="last_name" required value="<?php echo $edit_lname; ?>" pattern="^[A-Za-zĀ-ž\s]+$" title="Last name must  only contain letters">
         <label>E-mail:</label>
         <input type="email" name="email" required value="<?php echo $edit_email; ?>">
         <label>Phone:</label>

@@ -1,10 +1,3 @@
-<?php
-if (!isset($_SESSION['id'])) {
-    header("Location: index.php");
-    exit();
-}
-include 'messages_methods.php';
-?>
 
 <div id="message_form_wrapper">
     <div id="message_form_header">
@@ -42,6 +35,7 @@ include 'messages_methods.php';
             </div>
 </form>
 </div>
+
 <script>
 // Definējam globālo mainīgo, kas glabā saņēmēju skaitu
 var recipientCount = 0;

@@ -115,9 +115,6 @@ header("Access-Control-Allow-Origin: *");
 					if($_GET['id']==4){
 						include 'messages/messages_dashboard.php';
 					}
-					if($_GET['id']==43){
-						include 'messages/message_form.php';
-					}
 					if($_GET['id']==5){
 						include 'alerts/alerts_dashboard.php';
 					}

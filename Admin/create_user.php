@@ -16,9 +16,9 @@ include 'admin_methods_user.php';
             <label>Password:</label>
             <input type="text" name="user_password" maxlength="50" oninput="checkMinLength(this, 8)" required value="<?php echo $edit_password; ?>">
             <label>Name:</label>
-            <input type="text" name="user_fname" maxlength="50" required value="<?php echo $edit_fname; ?>" pattern="^[A-Za-zĀ-ž]+$" title="Name must only contain letters">
+            <input type="text" name="user_fname" maxlength="50" required value="<?php echo $edit_fname; ?>" pattern="^[A-Za-zĀ-ž\s]+$" title="Name must only contain letters">
             <label>Last Name:</label>
-            <input type="text" name="user_lname" maxlength="50" required value="<?php echo $edit_lname; ?>"pattern="^[A-Za-zĀ-ž]+$" title="Last name must  only contain letters">
+            <input type="text" name="user_lname" maxlength="50" required value="<?php echo $edit_lname; ?>"pattern="^[A-Za-zĀ-ž\s]+$" title="Last name must  only contain letters">
             <label>E-mail:</label>
             <input type="email" name="user_email" maxlength="50" required value="<?php echo $edit_email; ?>">
             <label>Phone:</label>

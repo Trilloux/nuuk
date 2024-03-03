@@ -22,7 +22,7 @@
 
 #message_form_wrapper{
     width: 90%;
-   margin-top: 5%;
+   margin-top: 1%;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -116,3 +116,78 @@
     margin-left: 2%;
 }
 
+.mailbox_block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.inbox_message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 50vw !important;
+    cursor: pointer;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: 1px solid white;
+    border-radius: 3px;
+
+}
+
+.message_info{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 100% !important;
+    min-height: 2.5vw;
+}
+
+.message_content{
+    max-width: 50vw;
+    min-width: 50vw;
+    background-color:rgb(243, 243, 243);
+    padding-top: 1%;
+ 
+}
+.message_subject{
+    font-weight: 530;
+    max-width: 29vw;
+    min-width: 29vw;
+ 
+}
+.message_sender{
+    max-width: 12vw;
+    min-width: 12vw;
+    font-weight: 530;
+}
+.noMessages{
+    display: block;
+    color: #FFA824;
+    font-size: 1.4vw;
+    animation: vibrate 0.35s infinite; /* Animation duration is 0.3s */
+    animation-delay: 0s; /* Start the animation immediately */
+    animation-iteration-count: 2; /* Run the animation 5 times */
+}
+
+@keyframes vibrate {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-1px); }
+    50% { transform: translateX(1px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(1px); }
+}
+
+
+#notRead{
+    background-color: #8dc6ff;
+}
+
+#read{
+    background-color: #e4f1fe;
+}

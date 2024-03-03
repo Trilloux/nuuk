@@ -10,7 +10,7 @@ if (isset($_SESSION['id'])) {
     findMsgTab($MsgTab_name);
     findSendTab($SendTab_name);
 }
-//Find Task table for user, if user doesn't have table 
+//Find INBOX messages table for user, if user doesn't have table 
 //Create new table with user id and first name and last name
 //Only 1 table will be created because of user specifics
 function findMsgTab($MsgTab_name){
@@ -21,6 +21,9 @@ function findMsgTab($MsgTab_name){
         createMsgTab($MsgTab_name);
     }
 }
+//Find OUTBOX messages table for user, if user doesn't have table 
+//Create new table with user id and first name and last name
+//Only 1 table will be created because of user specifics
 function findSendTab($SendTab_name){
     global $con;
     $getTab_query="SHOW TABLES LIKE '$SendTab_name'";
@@ -29,7 +32,7 @@ function findSendTab($SendTab_name){
         createSendTab($SendTab_name);
     }
 }
-//Create Task table in DB function
+//Create INBOX table in DB function
 function createMsgTab($MsgTab_name){
     global $con;
     $MsgTab_query = "CREATE TABLE IF NOT EXISTS $MsgTab_name (
@@ -50,10 +53,12 @@ function createMsgTab($MsgTab_name){
         echo 'Inbox table exists';
     }
 }
+//Create OUTBOX table in DB function
 function createSendTab($SendTab_name){
     global $con;
     $SendTab_query = "CREATE TABLE IF NOT EXISTS $SendTab_name (
         id INT PRIMARY KEY AUTO_INCREMENT,
+        sent_to VARCHAR(50),
         title VARCHAR(100) NOT NULL,
         context TEXT,
         file_path VARCHAR(255),
@@ -73,12 +78,13 @@ if(isset($_POST['submit'])){
     $msg_title = mysqli_real_escape_string($con, $_POST['title']);
     $msg_text = mysqli_real_escape_string($con, $_POST['description']);
     $sent_by = $_SESSION['firstName'].' '.$_SESSION['lastName'];
+    
 
-    // Pārbaudiet, vai ir augšupielādēts fails
+    // check if file uploaded
     if(isset($_FILES['file_upload']) && is_array($_FILES['file_upload']['name'])) {
         $upload_dir = 'msg_files/';
 
-        // Saglabāt visus failus
+        // Save all files
         $uploaded_files = array();
 
         // Loop through each uploaded file
@@ -86,23 +92,24 @@ if(isset($_POST['submit'])){
             $file_name = $_FILES['file_upload']['name'][$i];
             $file_tmp = $_FILES['file_upload']['tmp_name'][$i];
 
-            // Saglabāt failus, ja tiek augšupielādēti
+            // save files if uploaded
             if(move_uploaded_file($file_tmp, $upload_dir . $file_name)) {
                 $uploaded_files[] = $upload_dir . $file_name;
                 echo 'File uploaded successfully: ' . $file_name . '<br>';
             } 
         }
 
-        // Izveidojiet vienu ziņojumu ar visiem failiem, ja tie ir augšupielādēti
+        
+        //create variable to store file paths to be inserted in DB
         if (!empty($uploaded_files)) {
             $msg_file = implode(',', $uploaded_files);
         }
     } else {
-        // Ja fails nav augšupielādēts, uzstādiet tukšu faila ceļu
+        // If no files uploaded , then empty field to be stored in DB
         $msg_file = '';
     }
 
-    // Nosūtiet ziņu katram saņēmējam
+    // Send message to all added recipients
     $recipients = isset($_POST['recipients']) ? $_POST['recipients'] : array();
 foreach ($recipients as $recipient_id) {
     sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by);
@@ -119,6 +126,8 @@ function sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
         mysqli_stmt_bind_param($send_stmt, 'ssss', $msg_title, $msg_text, $msg_file, $sent_by);
         if(mysqli_stmt_execute($send_stmt)){
             echo 'Message sent succesfully';
+            //Add message to outbox table
+            sentMail($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by);
         }else{
             echo 'Error sending message: ' . mysqli_stmt_error($send_stmt);
         }
@@ -127,6 +136,27 @@ function sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
     }
 }
 
+function sentMail($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
+    global $con;
+    $sent_table = 'user_'.$_SESSION['id'].'_outbox';
+    //query to get recipient first name and last name from recipient id 
+    $getInfo_query = "SELECT firstName, lastName FROM users where id = $recipient_id";
+    $getInfo_result = mysqli_query($con, $getInfo_query);
+    while($row=mysqli_fetch_array($getInfo_result)){
+        $sent_to = $row['firstName'].' '.$row['lastName'];
+    }
+
+    $sentMail_query="INSERT INTO $sent_table (sent_to, title, context, file_path, sent_by) VALUES (?,?,?,?,?) ";
+    $sentMail_stmt=mysqli_prepare($con, $sentMail_query);
+    if($sentMail_stmt){
+        mysqli_stmt_bind_param($sentMail_stmt, 'sssss', $sent_to, $msg_title, $msg_text, $msg_file, $sent_by);
+    }
+    if(mysqli_stmt_execute($sentMail_stmt)){
+        //Add message to outbox table
+    }else{
+        echo 'Error adding message to sent mail: ' . mysqli_stmt_error($sentMail_stmt);
+    }
+}
 
 
 
