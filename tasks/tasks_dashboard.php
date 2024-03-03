@@ -8,7 +8,7 @@ include 'tasks_methods.php';
 
 <div id="tasks_wrapper">
     <div id="tasks_cpanel">
-        <button class="task_buttons"><a href="?id=43">&#x2295; New</a></button>
+        <button class="task_buttons"><a href="?id=21">&#x2295; New</a></button>
         <button class="task_buttons" onclick="editTask()">&#x2190; Edit</button>
         <button class="task_buttons" onclick="deleteTasks()">&#x2716; Delete</button>
         <button class="task_buttons"onclick="activeTasks()">&#x2605; Active</button>
@@ -47,7 +47,7 @@ include 'tasks_methods.php';
                     <td colspan="5" id="tb_title"><?php echo $row['title'] ?></td>
                 </tr>
                 <tr class="<?php echo $priorityClass; ?>">
-                <td colspan="5"><?php echo $row['description'] ?></td>
+                <td colspan="5"><?php echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$row['description']);?></td>
                 </tr>
                 <tr class="<?php echo $priorityClass; ?>">
                     <td><?php echo $row['created_by'] ?></td>

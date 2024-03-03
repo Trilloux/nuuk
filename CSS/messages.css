@@ -170,13 +170,17 @@
     cursor: text;
 }
 #reply_button{
-    color: #FFA824;
     font-size: 1.2vw;
     border: none;
     background-color: transparent;
     cursor: pointer;
     font-weight: 500;
+}
 
+#reply_button a{
+    text-decoration: none;
+    text-decoration-line: none;
+    color: #FFA824;
 }
 .noMessages{
     display: block;

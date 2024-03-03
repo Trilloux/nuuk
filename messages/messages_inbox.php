@@ -20,10 +20,7 @@
             if($row['important']=='yes'){
                 $messageMark='important';
             }
-        
-            
         ?>
-          
             <div class="inbox_message" id="<?php echo $messageMark; ?>">
                 <div class="message_info" onclick="showMessageContent(<?php echo $row['id']; ?>)">
                 <input type="checkbox" name="message_id" value="<?php echo $row['id']; ?>">
@@ -34,7 +31,10 @@
                 <div id="message_content_<?php echo $row['id']; ?>" class="message_content" style="display:none;">
                     <span class="message_subject"><?php echo $row['title']; ?><br></span>
                     <br>
-                    <?php echo $row['context']; ?>
+                    <?php 
+                   echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$row["context"]);
+                    ?>
+                    <br>
                     <?php 
                     // check if files added to message
                     if (!empty($row['file_path'])) {
@@ -50,7 +50,7 @@
                     <br>
                     <p></p>
                     <br>
-                    <button id="reply_button">&#8680; Reply</button>
+                    <button id="reply_button"><a href="?id=4&section=reply&reply_id=<?php echo $row['id']; ?>">&#8680; Reply</a></button>
                 </div>
             </div>
         <?php }

@@ -11,7 +11,7 @@ include 'Admin/admin_methods_news.php';
     <label>Title</label>
     <input type="text" name="title" id="news_title" required value="<?php echo $edit_title; ?>">
     <label>Content</label>
-    <textarea id="news_content" name="content" required><?php echo $edit_content; ?></textarea>
+    <textarea id="news_content" name="content" required><?php echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$edit_content);?></textarea>
     <label>Author</label>
     <input type="text" name="author" id="news_author" required value="<?php echo $edit_author; ?>">
     <div id="button_field">

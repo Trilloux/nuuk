@@ -28,6 +28,9 @@ include 'messages_methods.php';
             case 'new':
                 include 'message_form.php';
                 break;
+            case 'reply':
+                include 'reply_form.php';
+                break;
             default:
                 // Ja norādītā sadaļa nav atpazīta, noklusējuma kārtā ielādējam inbox
                 include 'messages_inbox.php';

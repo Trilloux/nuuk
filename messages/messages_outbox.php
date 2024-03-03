@@ -19,7 +19,9 @@
                 <div id="message_content_<?php echo $row['id']; ?>" class="message_content" style="display:none;">
                 <span class="message_subject"><?php echo $row['title']; ?><br></span>
                 <br>
-                    <?php echo $row['context']; ?>
+                    <?php 
+                    echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$row["context"]);
+                     ?>
                     <?php echo $row['file_path'];?>
                 </div>
             </div>

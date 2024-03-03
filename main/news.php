@@ -14,7 +14,7 @@ while($row = mysqli_fetch_array($blog_result)){
     </div>
     <div id="content_field">
         <div id="blog_content">
-        <p><?php echo $row['content']; ?></p>
+        <p><?php echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$row['content']);?></p>
         </div>
     </div>
     <div id="author_field">

@@ -37,6 +37,7 @@
 </div>
 
 <script>
+
 // Definējam globālo mainīgo, kas glabā saņēmēju skaitu
 var recipientCount = 0;
 
