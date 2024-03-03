@@ -33,6 +33,7 @@
                 </div>
                 <div id="message_content_<?php echo $row['id']; ?>" class="message_content" style="display:none;">
                     <span class="message_subject"><?php echo $row['title']; ?><br></span>
+                    <br>
                     <?php echo $row['context']; ?>
                     <?php 
                     // check if files added to message
@@ -46,6 +47,10 @@
                         }
                     }
                     ?>
+                    <br>
+                    <p></p>
+                    <br>
+                    <button id="reply_button">&#8680; Reply</button>
                 </div>
             </div>
         <?php }
