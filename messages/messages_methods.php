@@ -117,6 +117,7 @@ foreach ($recipients as $recipient_id) {
 
 }
 
+
 function sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
     global $con;
     $message_table = 'user_' . $recipient_id . '_inbox';
@@ -158,9 +159,68 @@ function sentMail($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
     }
 }
 
+if(isset($_POST['submit_reply'])){    
+    $reply_title = mysqli_real_escape_string($con, $_POST['title']);
+    $reply_text = mysqli_real_escape_string($con, $_POST['description']);
+    $sent_by = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
 
+    // Izvilkiet saņēmēja ID no datu bāzes, izmantojot viņa vārdu un uzvārdu
+    $recipient_name = $_POST['recipient'];
+    $recipient_query = "SELECT id FROM users WHERE CONCAT(firstName, ' ', lastName) = '$recipient_name'";
+    $recipient_result = mysqli_query($con, $recipient_query);
+    if($recipient_row = mysqli_fetch_assoc($recipient_result)) {
+        $recipient_id = $recipient_row['id'];
+    } else {
+        echo "Recipient not found!";
+        return; // Pārtraucam funkcijas izpildi, ja saņēmējs nav atrasts
+    }
 
+    if(isset($_FILES['file_upload']) && is_array($_FILES['file_upload']['name'])) {
+        $upload_dir = 'msg_files/';
 
+        // Save all files
+        $uploaded_files = array();
 
+        // Loop through each uploaded file
+        for($i = 0; $i < count($_FILES['file_upload']['name']); $i++) {
+            $file_name = $_FILES['file_upload']['name'][$i];
+            $file_tmp = $_FILES['file_upload']['tmp_name'][$i];
 
+            // save files if uploaded
+            if(move_uploaded_file($file_tmp, $upload_dir . $file_name)) {
+                $uploaded_files[] = $upload_dir . $file_name;
+                echo 'File uploaded successfully: ' . $file_name . '<br>';
+            } 
+        }
+
+        
+        //create variable to store file paths to be inserted in DB
+        if (!empty($uploaded_files)) {
+            $msg_file = implode(',', $uploaded_files);
+        }
+    } else {
+        // If no files uploaded , then empty field to be stored in DB
+        $msg_file = '';
+    }
+
+    replyMessage($con, $recipient_id, $reply_title, $reply_text, $msg_file, $sent_by);
+}
+
+function replyMessage($con, $recipient_id, $reply_title, $reply_text, $msg_file, $sent_by){
+    $message_table = 'user_' . $recipient_id . '_inbox';
+    $reply_query="INSERT INTO $message_table (title, context, file_path, sent_by) VALUES (?,?,?,?)";
+    $reply_stmt = mysqli_prepare($con, $reply_query);
+    if($reply_stmt){
+        mysqli_stmt_bind_param($reply_stmt, 'ssss', $reply_title, $reply_text, $msg_file, $sent_by);
+        if(mysqli_stmt_execute($reply_stmt)){
+            echo 'Reply sent succesfully';
+            //Add message to outbox table
+            sentMail($recipient_id, $reply_title, $reply_text, $msg_file, $sent_by);
+        }else{
+            echo 'Error sending reply: ' . mysqli_stmt_error($reply_stmt);
+        }
+    }else{
+        echo 'Error '.mysqli_error($con);
+    }
+}
 ?>

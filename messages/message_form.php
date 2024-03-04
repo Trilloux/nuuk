@@ -1,13 +1,13 @@
 
 <div id="message_form_wrapper">
-    <div id="message_form_header">
+    <div class="message_form_header">
     <span>Message information</span>
     </div>
     <form method="POST" action="" id="message_form" enctype="multipart/form-data">
     <div id="recipients"></div>
 
 <label for="userinfo">Users</label>
-<select name="userinfo" id="userinfo">
+<select name="userinfo" id="userinfo" required>
     <?php
     $show_query = 'SELECT * FROM users';
     $show_result = mysqli_query($con, $show_query);   
@@ -28,6 +28,7 @@
         <textarea id="task_description" name="description" required></textarea>
     <label id="fileLabel">Attachments:</label><br>
         <input type="file" id="file_upload" name="file_upload[]" multiple>
+        <div id="file_list"></div>
 
     <div id="button_field">
         <input type="submit" name="submit" value="Send" class="form_button">
@@ -75,6 +76,40 @@ document.getElementById('addRecipient').addEventListener('click', function() {
         });
     }
 });
+document.getElementById('message_form').addEventListener('submit', function(event) {
+    // Pārbaudam, vai ir pievienoti saņēmēji
+    var recipients = document.querySelectorAll('[name="recipients[]"]');
+    if (recipients.length === 0) {
+        // Ja nav pievienoti saņēmēji, apturam formu no iesniegšanas
+        event.preventDefault();
+        // Parādīt kļūdas paziņojumu vai padomu
+        alert('Please add recipient!');
+    }
+});
+
+
+document.getElementById('file_upload').addEventListener('change', function() {
+    var files = this.files;
+    var fileList = document.getElementById('file_list');
+
+    // Notīra iepriekšējo sarakstu
+    fileList.innerHTML = '';
+
+    // Pārbauda, vai ir augšupielādēti faili
+    if (files.length > 0) {
+        // Veido jaunu sarakstu ar augšupielādētajiem failiem
+        var ul = document.createElement('ul');
+        for (var i = 0; i < files.length; i++) {
+            var li = document.createElement('li');
+            li.textContent = files[i].name + ' - ' + files[i].size + ' bytes';
+            ul.appendChild(li);
+        }
+        fileList.appendChild(ul);
+    }
+});
+
+
+
 
 // Pievienojam notikuma klausītāju formas iesniegšanai
 document.getElementById('message_form').addEventListener('submit', function() {

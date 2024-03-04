@@ -52,7 +52,7 @@
     font-size: 1vw;
 }
 
-#message_form_header{
+.message_form_header{
     color: #FFA824;
     text-align: center;
     font-size: 1.5vw;

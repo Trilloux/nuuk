@@ -24,7 +24,8 @@ function getTaskAlerts($user_id) {
         $intTime = (int) $numericTime;
         if ($intTime> $intAlert || $row['alert'] == NULL) {
             $description = strlen($row['description']) > 250 ? substr($row['description'], 0, 250) . '...' : $row['description'];
-            $tasks[] ='<span class="alert-title">'.$row['title'].'</span><br>'.$description . '<br>' .'<span class="alert-author">'.$row['created_by'].'</span><br><hr class="alert-line">';
+            $description_with_br = preg_replace('/\v+|\\\r\\\n/Ui', '<br/>', $description);
+            $tasks[] ='<span class="alert-title">'.$row['title'].'</span><br>'.$description_with_br . '<br>' .'<span class="alert-author">'.$row['created_by'].'</span><br><hr class="alert-line">';
         }
     }
     return $tasks;

@@ -39,6 +39,7 @@
                     // check if files added to message
                     if (!empty($row['file_path'])) {
                         //divide file paths if multiple files added
+                        echo '<span style="color: #FFA824; font-weight: bold;">Added files:</span><br>';
                         $files = explode(',', $row['file_path']);
                         // show hyperlinks to each files
                         foreach ($files as $file) {
