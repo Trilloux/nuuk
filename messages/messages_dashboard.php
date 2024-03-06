@@ -12,9 +12,9 @@ include 'messages_methods.php';
         <button class="task_buttons"><a href="?id=4">&#8595; Inbox</button>
         <button class="task_buttons"> <a href="?id=4&section=sent">&#8593; Sent</button>
         <button class="task_buttons"><a href="?id=4&section=new">&#x2295; New</a></button>
-        <button class="task_buttons" onclick="deleteTasks()">&#x2716; Delete</button>
-        <button class="task_buttons"onclick="activeTasks()">&#x2605; Important</button>
-        <button class="task_buttons" onclick="compTasks()" >&#x2713; Read</button>
+        <button class="task_buttons" onclick="deleteMessage()">&#x2716; Delete</button>
+        <button class="task_buttons"onclick="markImportant()">&#x2605; Important</button>
+        <button class="task_buttons" onclick="markRead()" >&#x2713; Read</button>
     </div>
     <?php 
     // Pārbaudām, vai GET parametrs 'section' ir definēts un atbilstošs
@@ -42,3 +42,5 @@ include 'messages_methods.php';
     }
     ?>
 </div>
+
+

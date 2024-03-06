@@ -33,7 +33,7 @@ function showTable($table_name, $con){
             <td colspan="5" id="tb_title"><?php echo $row['title'] ?></td>
         </tr>
         <tr class="<?php echo $priorityClass; ?>">
-            <td colspan="5"><?php echo $row['description'] ?></td>
+            <td colspan="5"><?php echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$row['description']);?></td>
         </tr>
         <tr class="<?php echo $priorityClass; ?>">
             <td><?php echo $row['created_by'] ?></td>

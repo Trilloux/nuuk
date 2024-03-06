@@ -6,6 +6,9 @@ if (!isset($_SESSION['id'])) {
 }
 include 'Admin/admin_methods_news.php';
 ?>
+<div id="news_heading">
+    <span>News Information</span>
+</div>
 <div id="news_form_wrapper">
 <form method="POST" action="" id="news_form">
     <label>Title</label>
