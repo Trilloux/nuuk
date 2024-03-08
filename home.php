@@ -63,7 +63,7 @@ header("Access-Control-Allow-Origin: *");
 					<button class="cp_button"><a href="?id=1"><img src="PIC/main.png" alt="home"></a></button>
 					<button class="cp_button"><a href="?id=2"><img src="PIC/tasks.png" alt="tasks"></a></button>
 					<button class="cp_button"><a href="?id=3"><img src="PIC/calendar.png" alt="calendar"></a></button>
-					<button class="cp_button"><a href="?id=4"><img src="PIC/messages.png" alt="messages"></a></button>
+					<button class="cp_button" id="messages_button"><a href="?id=4"><img src="PIC/messages.png" alt="messages"><span id="message_count">0</span></a></button>
 					<button class="cp_button" id="alerts_button"><a href="?id=5" id="alerts_image"><img src="PIC/alerts.png" alt="alerts"><span id="alert_count">0</span></a></button>
 					<button class="cp_button"><a href=""><img src="PIC/files.png" alt="files"></a></button>
 					<button id="logout_button"><a href="logout.php" class="link" id="logout_link"><span id="std_icon">&#9212;</span> Logout</a></button>

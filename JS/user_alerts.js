@@ -20,23 +20,6 @@ setInterval(function() {
     updateTimeCookie();
 }, 1000);
 
-
-function getTaskAlerts() {
-    $.ajax({
-        url: 'home.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            // Konsolē paziņojumu noņemts
-        },
-        error: function(xhr, status, error) {
-            // Kļūdas paziņojumu noņemts
-        }
-    });
-}
-
-
-
 function loadDoc() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -50,4 +33,28 @@ function loadDoc() {
     xhttp.send();
 }
 
-setInterval(loadDoc, 1); // Pārbaudīt ik pēc 1 sekundēm
+
+
+function loadMessageData() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        const responseText = this.responseText.trim();
+        const messageCountElement = document.getElementById("message_count");
+    
+        // Set the obtained number as text
+        messageCountElement.innerText = responseText;
+    };
+    xhttp.open("GET", "messages/message_data.php", true);
+    xhttp.send();
+}
+
+
+// Load task data every 1 second
+setInterval(function() {
+    loadDoc();
+}, 100);
+
+// Load message data every half-second
+setInterval(function() {
+    loadMessageData();
+}, 100);

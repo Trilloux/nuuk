@@ -50,7 +50,7 @@ function createMsgTab($MsgTab_name){
     if(mysqli_num_rows($MsgTab_result) > 0){
         echo 'Table created';
     }else{
-        echo 'Inbox table exists';
+        echo 'Inbox table exists | ';
     }
 }
 //Create OUTBOX table in DB function
@@ -114,7 +114,7 @@ if(isset($_POST['submit'])){
 foreach ($recipients as $recipient_id) {
     sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by);
 }
-
+echo 'Message sent!';
 }
 
 
@@ -126,8 +126,6 @@ function sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by){
     if($send_stmt){
         mysqli_stmt_bind_param($send_stmt, 'ssss', $msg_title, $msg_text, $msg_file, $sent_by);
         if(mysqli_stmt_execute($send_stmt)){
-            echo 'Message sent succesfully';
-            //Add message to outbox table
             sentMail($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by);
         }else{
             echo 'Error sending message: ' . mysqli_stmt_error($send_stmt);
@@ -189,7 +187,7 @@ if(isset($_POST['submit_reply'])){
             // save files if uploaded
             if(move_uploaded_file($file_tmp, $upload_dir . $file_name)) {
                 $uploaded_files[] = $upload_dir . $file_name;
-                echo 'File uploaded successfully: ' . $file_name . '<br>';
+               
             } 
         }
 

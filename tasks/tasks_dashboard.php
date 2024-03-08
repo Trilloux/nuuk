@@ -20,6 +20,9 @@ include 'tasks_methods.php';
                 <?php
                 $shwTab_query="SELECT * FROM $table_name ORDER BY created DESC ";
                 $shwTab_result=mysqli_query($con, $shwTab_query);
+                if(mysqli_num_rows($shwTab_result)==0){
+                    echo '<p class="noMessages">You currently have no tasks!</p>';
+                }else{
                 while($row=mysqli_fetch_array($shwTab_result)){
                     $priorityClass = '';
                 //                               --- Switch to get priority class for CSS  ----
@@ -36,10 +39,10 @@ include 'tasks_methods.php';
                     default:
                         $priorityClass = '';
                 }
-
                 if($row['status']=='completed'){
                     $priorityClass = 'completed';
                 }
+            
                 
                 ?>
                <tr class="<?php echo $priorityClass; ?>">
@@ -59,7 +62,8 @@ include 'tasks_methods.php';
                 <tr id="spacer-row">
                 <td colspan="6"></td>
                 </tr>
-            <?php } ?>
+            <?php }
+            }?>
             </table>
         </div>
     </div>

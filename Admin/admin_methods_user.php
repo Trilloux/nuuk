@@ -92,10 +92,15 @@ function deleteUser($deleteId) {
     $del_table_query = 'DROP TABLE IF EXISTS ' . $table_name;
     mysqli_query($con, $del_table_query);
 
-    // Delete messages table
-    $mesg_table_name = 'user_' . $deleteId . '_messages';
-    $del_msg_table_query = 'DROP TABLE IF EXISTS ' . $mesg_table_name;
-    mysqli_query($con, $del_msg_table_query);
+    // Delete inbox messages table
+    $inbox_table_name = 'user_'. $deleteId .'_inbox';
+    $del_inbox_table_query = 'DROP TABLE IF EXISTS ' . $inbox_table_name;
+    mysqli_query($con, $del_inbox_table_query);
+
+     // Delete outbox messages table
+    $outbox_table_name = 'user_' . $deleteId . '_outbox';
+    $del_outbox_table_query = 'DROP TABLE IF EXISTS ' . $outbox_table_name;
+    mysqli_query($con, $del_outbox_table_query);
 
     // Now delete the user
     $del_user_query = 'DELETE FROM users WHERE id = ?';

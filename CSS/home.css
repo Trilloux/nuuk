@@ -156,13 +156,34 @@ body{
   z-index: 2;
   position: absolute;
   transform: translate(-50%, -50%);
-  left:72%;
+  left:69%;
+  top: 48%;
+  color: red;
+  font-size: 1.4vw;
+  font-weight: 600;
+}
+
+#messages_button{
+  position: relative;
+}
+
+#messages_button img{
+  z-index: 1;
+}
+
+#message_count{
+  z-index: 2;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left:92%;
   top: 48%;
   color: red;
   font-size: 1.4vw;
   font-weight: 600;
   
 }
+
+
 #logout_button{
 margin-top: auto;
 margin-bottom: 10%;
