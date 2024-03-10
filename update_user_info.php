@@ -17,6 +17,7 @@ $row = mysqli_fetch_array($result);
 $edit_fname = $row['firstName'];
 $edit_lname = $row['lastName'];
 $edit_email = $row['email'];
+$edit_password= $row['password'];
 $edit_phone = $row['phone'];
 if (!$result) {
     die('Connection error' . mysqli_connect_error());
@@ -28,7 +29,9 @@ if (isset($_POST['submit'])) {
     $update_fname = mysqli_real_escape_string($con, $_POST['first_name']);
     $update_lname = mysqli_real_escape_string($con, $_POST['last_name']);
     $update_email = mysqli_real_escape_string($con, $_POST['email']);
+    $update_password = mysqli_real_escape_string($con, $_POST['password']);
     $update_phone = mysqli_real_escape_string($con, $_POST['phone']);
+
 
     if ($_FILES['profile_image']['size'] > 0) {
         // Call function to handle image upload and get the new image name
@@ -46,15 +49,15 @@ if (isset($_POST['submit'])) {
 
     // Call function to update DB entry for specific user id
     //false - $imgUpload , because here dont upload img
-    editQuery($con, $id, $update_fname, $update_lname, $update_email, $update_phone, false);
+    editQuery($con, $id, $update_fname, $update_lname, $update_email, $update_password, $update_phone, false);
 }
 //Update database function
-function editQuery($con, $id, $update_fname, $update_lname, $update_email, $update_phone, $imgUpload)
+function editQuery($con, $id, $update_fname, $update_lname, $update_email, $update_password, $update_phone, $imgUpload)
 {
    
-    $query = "UPDATE users SET firstName = ?, lastName = ?, email = ?, phone = ? WHERE id = ?";
+    $query = "UPDATE users SET firstName = ?, lastName = ?, email = ?, password = ?, phone = ? WHERE id = ?";
     $stmt = mysqli_prepare($con, $query);
-    mysqli_stmt_bind_param($stmt, 'ssssi', $update_fname, $update_lname, $update_email, $update_phone, $id);
+    mysqli_stmt_bind_param($stmt, 'sssssi', $update_fname, $update_lname, $update_email, $update_password, $update_phone, $id);
 
     mysqli_stmt_execute($stmt);
 
@@ -132,7 +135,7 @@ function uploadImage($con, $id)
         if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $targetFile)) {
             $newImageName = basename($_FILES["profile_image"]["name"]);
             // Set $imgUpload true , if file uploaded, send it to updateQuery function as true
-            editQuery($con, $id, $_SESSION['firstName'], $_SESSION['lastName'], $_SESSION['email'], $_SESSION['phone'] ,true);
+            editQuery($con, $id, $_SESSION['firstName'], $_SESSION['lastName'], $_SESSION['email'], $_SESSION['password'], $_SESSION['phone'] ,true);
             return $newImageName;
         } else {
             echo "Sorry, there was an error uploading your file.";

@@ -40,8 +40,13 @@ if (isset($_POST['save'])) {
         $_SESSION["lastName"] = $row['lastName'];
         $_SESSION["role"]= $row['role'];
 
+        // Call the setStatus function to update the user's status
+        setOnline($_SESSION["id"]);
+
         // Redirect to the home page
         header("Location: home.php?id=1");
+        exit();
+
     } else {
         // If no matching user is found, set an error message and redirect to the login page
         $_SESSION['login_error'] = "Invalid Username/Password!";
@@ -50,12 +55,27 @@ if (isset($_POST['save'])) {
         displayTooManyAttemptsMessage();
         isLoginBlocked();
         
-        exit();
     }
 
     // Close the prepared statement and the database connection
     $stmt->close();
     $con->close();
 }
+
+function setOnline($online_id){
+    // Include the database connection file
+    include 'database.php';
+
+    // Update the user's status to "online" in the database
+    $status_query = "UPDATE users SET status='online' WHERE id=$online_id";
+    $status_result = mysqli_query($con, $status_query);
+    if(!$status_result){
+        echo ('Error updating status(online/offline)' . mysqli_error($con));
+    }
+
+    // Close the database connection
+    mysqli_close($con);
+}
 ?>
+
 

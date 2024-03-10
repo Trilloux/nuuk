@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+ 
     var welcomeText = document.querySelector("#welcome p");
 
     // Pārbaudiet, vai lietotājs ir ielogojies pirmo reizi, izmantojot sesijas uzglabāšanu
@@ -32,6 +33,11 @@ logoutButton.addEventListener("click", function() {
       // Scroll page to top when logging out 
       window.scrollTo (0, 0);
     });
+    //reload page every 5min
+    setInterval(function() {
+      window.location.reload();
+  }, 180000); 
+  
   });
 
 

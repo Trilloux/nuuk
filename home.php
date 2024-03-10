@@ -65,7 +65,7 @@ header("Access-Control-Allow-Origin: *");
 					<button class="cp_button"><a href="?id=3"><img src="PIC/calendar.png" alt="calendar"></a></button>
 					<button class="cp_button" id="messages_button"><a href="?id=4"><img src="PIC/messages.png" alt="messages"><span id="message_count">0</span></a></button>
 					<button class="cp_button" id="alerts_button"><a href="?id=5" id="alerts_image"><img src="PIC/alerts.png" alt="alerts"><span id="alert_count">0</span></a></button>
-					<button class="cp_button"><a href=""><img src="PIC/files.png" alt="files"></a></button>
+					<button class="cp_button"><a href="?id=6"><img src="PIC/files.png" alt="files"></a></button>
 					<button id="logout_button"><a href="logout.php" class="link" id="logout_link"><span id="std_icon">&#9212;</span> Logout</a></button>
 				</div>
 				<div id="main">
@@ -118,6 +118,9 @@ header("Access-Control-Allow-Origin: *");
 					if($_GET['id']==5){
 						include 'alerts/alerts_dashboard.php';
 					}
+					if($_GET['id']==6){
+						include 'files/files_dashboard.php';
+					}
 					
 					?>
 				</div>
@@ -141,6 +144,23 @@ header("Access-Control-Allow-Origin: *");
 					<?php if ($_SESSION['role'] == 'admin') { ?>
     				<button id="settings_button"><a href="?id=admin" id="settings_link">Admin</a></button>
 					<?php } ?>
+					<div id="online_bar">
+						<h3>Users online</h3>
+						<?php
+						$online_query="SELECT * FROM users WHERE status='online'";
+						$online_result=mysqli_query($con, $online_query);
+						while($row=mysqli_fetch_array($online_result)){
+							if($row['id'] != $_SESSION['id']) {
+						?>
+						<div class="user_online">
+							<p class="online_dot"></p>
+							<p class="userCred"><?php echo $row['firstName'].' '.$row['lastName']; ?></p>
+						</div>
+						<?php 
+							}
+						}
+						?>
+					</div>
 				</div>
 			</div>
 			<div id="sub_content">

@@ -25,12 +25,15 @@ if ($profileImageResult && $row = mysqli_fetch_assoc($profileImageResult)) {
             <label for="file_input">Change Picture</label>
             <input type="file" id="file_input" name="profile_image" accept="image/*" onchange="previewImage(this)">
         </div>
+        <br>
         <label>Name:</label>
         <input type="text" name="first_name" required value="<?php echo $edit_fname; ?>" pattern="^[A-Za-zĀ-ž\s]+$" title="Name must only contain letters">
         <label>Last Name:</label>
         <input type="text" name="last_name" required value="<?php echo $edit_lname; ?>" pattern="^[A-Za-zĀ-ž\s]+$" title="Last name must  only contain letters">
         <label>E-mail:</label>
         <input type="email" name="email" required value="<?php echo $edit_email; ?>">
+        <label>Password:</label>
+        <input type="text" name="password" required value="<?php echo $edit_password; ?>">
         <label>Phone:</label>
         <input type="text" name="phone" required value="<?php echo $edit_phone; ?>" pattern="[0-9+]+" title="Only numbers or +">
         <div id="button_field">

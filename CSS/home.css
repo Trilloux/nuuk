@@ -222,6 +222,7 @@ font-weight: bold;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
     
 }
 
@@ -254,6 +255,44 @@ transform: scale(1);
     font-weight: bold;
 }
 
+#online_bar{
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#online_bar h3{
+  color: #FFA824;
+  text-align: center;
+}
+.user_online{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  height: 2.7vw;
+  margin-bottom: .5%;
+}
+.online_dot {
+  display: inline-block;
+  width: .9vw; /* Iestatiet punkta (apļa) izmēru */
+  height: .9vw; /* Iestatiet punkta (apļa) izmēru */
+  border-radius: 50%; /* Iestatiet apļa formu */
+  background-color: #1AFE03; /* Iestatiet punkta (apļa) fona krāsu */
+  margin-left: 5%;
+  margin-right: 5%;
+
+ 
+}
+.userCred{
+  color: #0046a0 !important;
+  font-weight: 600 !important;
+  font-size: 1vw;
+  max-height: 2vw;
+}
 
 #sub_content{
    display: flex;

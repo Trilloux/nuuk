@@ -52,9 +52,9 @@ function loadMessageData() {
 // Load task data every 1 second
 setInterval(function() {
     loadDoc();
-}, 100);
+}, 1);
 
 // Load message data every half-second
 setInterval(function() {
     loadMessageData();
-}, 100);
+}, 1);
