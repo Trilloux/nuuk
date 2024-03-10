@@ -1,0 +1,33 @@
+#other_user_wrapper{
+    margin-top: 5%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+}
+
+.other_user_info{
+    display: flex;
+    flex-direction: row;
+    padding-top: 2%;
+    /*border: 2px dashed #FFA824; */
+    color: #0046a0;
+    font-size: 1.2vw;
+    font-weight: 600;
+    min-height: 14vw;
+}
+
+
+.profile_image_container {
+    width: 12vw; /* Mainīgais lieluma izmērs */
+    height: 12vw; /* Mainīgais lieluma izmērs */
+    border-radius: 50%; /* Pārvēršam div elementu apļveida formā */
+    overflow: hidden; /* Paslēpjam attēlu ārpus apļveida forma */
+    margin-right: 5%;
+    margin-left: 3%;
+}
+
+.profile_image {
+    width: 100%; /* Atbilst div platībai */
+    height: auto; /* Saglabā attēla proporcijas */
+    display: block; /* Padara bildi centrētu */
+}

@@ -31,6 +31,7 @@ header("Access-Control-Allow-Origin: *");
 		   <link rel="stylesheet" href="CSS/calendar.css">
 		   <link rel="stylesheet" href="CSS/admin_events.css">
 		   <link rel="stylesheet" href="CSS/messages.css">
+		   <link rel="stylesheet" href="CSS/other_user_info.css">
 		   <script src="JS/onload_home.js"></script>
 		   <script src="JS/user_alerts.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -121,6 +122,9 @@ header("Access-Control-Allow-Origin: *");
 					if($_GET['id']==6){
 						include 'files/files_dashboard.php';
 					}
+					if($_GET['show_info']){
+						include 'other_user_info.php';
+					}
 					
 					?>
 				</div>
@@ -154,7 +158,7 @@ header("Access-Control-Allow-Origin: *");
 						?>
 						<div class="user_online">
 							<p class="online_dot"></p>
-							<p class="userCred"><?php echo $row['firstName'].' '.$row['lastName']; ?></p>
+							<a href="?show_info=<?php echo $row['id']; ?>" id="online_info_link"><p class="userCred"><?php echo $row['firstName'].' '.$row['lastName']; ?></p></a>
 						</div>
 						<?php 
 							}

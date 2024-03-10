@@ -284,14 +284,21 @@ transform: scale(1);
   background-color: #1AFE03; /* Iestatiet punkta (apļa) fona krāsu */
   margin-left: 5%;
   margin-right: 5%;
-
- 
 }
 .userCred{
   color: #0046a0 !important;
   font-weight: 600 !important;
   font-size: 1vw;
   max-height: 2vw;
+}
+
+#online_info_link{
+  text-decoration-line: none;
+  transition: text-shadow 0.3s ease;
+}
+
+#online_info_link:hover{
+  transform: scale(1.1); 
 }
 
 #sub_content{
