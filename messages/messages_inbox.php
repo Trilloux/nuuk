@@ -29,12 +29,27 @@
                     <span class="message_time"><?php echo date('Y-m-d', strtotime($row['created'])); ?></span>
                 </div>
                 <div id="message_content_<?php echo $row['id']; ?>" class="message_content" style="display:none;">
-                    <span class="message_subject"><?php echo $row['title']; ?><br></span>
-                    <br>
-                    <?php 
-                   echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$row["context"]);
-                    ?>
-                    <br>
+                <span class="message_subject"><?php echo $row['title']; ?><br></span>
+                <br>
+                <?php
+                //                 -----PREG REPLACE PROBABLY IS NOT NECESSARY
+                //                 -----IF STRING IS NOT SAVED IN DB WITH MYSQLI_REAL_ESCAPE
+                //                 -----JUST SAVE IT IN DB WITH $_POST NOT REAL_ESCAPE
+                        if (strpos($row['context'], 'http') !== false) {
+                        // Replace links with html
+                        $content_with_links = preg_replace("/(http[^\s]+)/", "<a href='$1'>$1</a>", $row["context"]);
+
+                        // replace `<br>` with empty space
+                        $content_with_links = str_replace('<br>', ' ', $content_with_links);
+
+                        // replace text with links and  \v+, \r, \n with <br/> tag
+                        echo preg_replace('/(?<!<\/a>)\v+|\\\r\\\n|\\n/', '<br/>', $content_with_links);
+                        } else {
+                        // If no links just display text
+                        echo preg_replace('/\v+|\\\r\\\n|\\n/', '<br/>', $row["context"]);
+                        }
+                        ?>
+                <br>
                     <?php 
                     // check if files added to message
                     if (!empty($row['file_path'])) {

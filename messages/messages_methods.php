@@ -76,11 +76,10 @@ function createSendTab($SendTab_name){
 
 if(isset($_POST['submit'])){
     $msg_title = mysqli_real_escape_string($con, $_POST['title']);
-    $msg_text = mysqli_real_escape_string($con, $_POST['description']);
+    $msg_text = $_POST['description'];
     $sent_by = $_SESSION['firstName'].' '.$_SESSION['lastName'];
-    
 
-    // check if file uploaded
+    // Check if file uploaded
     if(isset($_FILES['file_upload']) && is_array($_FILES['file_upload']['name'])) {
         $upload_dir = 'msg_files/';
 
@@ -88,33 +87,40 @@ if(isset($_POST['submit'])){
         $uploaded_files = array();
 
         // Loop through each uploaded file
-        for($i = 0; $i < count($_FILES['file_upload']['name']); $i++) {
-            $file_name = $_FILES['file_upload']['name'][$i];
-            $file_tmp = $_FILES['file_upload']['tmp_name'][$i];
+        foreach($_FILES['file_upload']['name'] as $key => $file_name) {
+            $file_tmp = $_FILES['file_upload']['tmp_name'][$key];
 
-            // save files if uploaded
-            if(move_uploaded_file($file_tmp, $upload_dir . $file_name)) {
-                $uploaded_files[] = $upload_dir . $file_name;
-                echo 'File uploaded successfully: ' . $file_name . '<br>';
+            // Generate a unique identifier (e.g., timestamp)
+            $unique_identifier = time(); // You can use other methods to generate a unique identifier
+
+            // Get file extension
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
+            // Construct new file name with unique identifier
+            $new_file_name = $unique_identifier . '_' . $file_name;
+
+            // Move the uploaded file to the upload directory with the new name
+            if(move_uploaded_file($file_tmp, $upload_dir . $new_file_name)) {
+                $uploaded_files[] = $upload_dir . $new_file_name;
+               
             } 
         }
 
-        
-        //create variable to store file paths to be inserted in DB
+        // Create variable to store file paths to be inserted in DB
         if (!empty($uploaded_files)) {
             $msg_file = implode(',', $uploaded_files);
         }
     } else {
-        // If no files uploaded , then empty field to be stored in DB
+        // If no files uploaded, then empty field to be stored in DB
         $msg_file = '';
     }
 
     // Send message to all added recipients
     $recipients = isset($_POST['recipients']) ? $_POST['recipients'] : array();
-foreach ($recipients as $recipient_id) {
-    sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by);
-}
-echo 'Message sent!';
+    foreach ($recipients as $recipient_id) {
+        sendMsg($recipient_id, $msg_title, $msg_text, $msg_file, $sent_by);
+    }
+    echo 'Message sent!';
 }
 
 

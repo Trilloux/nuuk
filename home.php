@@ -32,6 +32,7 @@ header("Access-Control-Allow-Origin: *");
 		   <link rel="stylesheet" href="CSS/admin_events.css">
 		   <link rel="stylesheet" href="CSS/messages.css">
 		   <link rel="stylesheet" href="CSS/other_user_info.css">
+		   <link rel="stylesheet" href="CSS/files.css">
 		   <script src="JS/onload_home.js"></script>
 		   <script src="JS/user_alerts.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -97,6 +98,9 @@ header("Access-Control-Allow-Origin: *");
 					}
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_8' && $_SESSION['role'] == 'admin'){
 						include 'Admin/edit_calendar.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_9' && $_SESSION['role'] == 'admin'){
+						include 'Admin/file_form.php';
 					}
 					if($_GET['id']=='edit_id'){
 						include 'edit_profile.php';

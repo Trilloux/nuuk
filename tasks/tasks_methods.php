@@ -62,8 +62,8 @@ if(isset($_GET['task_id'])) {
 //Create and update variables
 if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
     // Create new variables from form input fields when form is submitted
-    $task_title = mysqli_real_escape_string($con, $_POST['title']);
-    $task_descr = mysqli_real_escape_string($con, $_POST['description']);
+    $task_title = $_POST['title'];
+    $task_descr = $_POST['description'];
     //Set default to alert if not added alert time
     $task_alert = !empty($_POST['alert']) ? mysqli_real_escape_string($con, $_POST['alert']) : NULL;
     $task_priority = mysqli_real_escape_string($con, $_POST['priority']);

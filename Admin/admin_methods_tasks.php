@@ -51,8 +51,8 @@ function createTable($table_name){
 
 if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
     // Create new variables from form input fields when form is submitted
-    $task_title = mysqli_real_escape_string($con, $_POST['title']);
-    $task_descr = mysqli_real_escape_string($con, $_POST['description']);
+    $task_title =  $_POST['title'];
+    $task_descr = $_POST['description'];
     $task_priority = mysqli_real_escape_string($con, $_POST['priority']);
     $task_by = $_SESSION['firstName'];
     $sel_id = $_POST['userinfo'];

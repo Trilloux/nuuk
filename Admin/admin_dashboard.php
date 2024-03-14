@@ -29,5 +29,12 @@ include '../database.php';
         <button class="admin_buttons"><a href="?id=admin_7">Create Event</a></button>
         <button class="admin_buttons"><a href="?id=admin_8">Edit/Delete Event</a></button>
     </div>
+    <div id="file_actions">
+        <h2>File actions</h2>
+        <p>All information regarding workspace file section. Create new file/link posts or edit/delete existing .</p>
+        <button class="admin_buttons"><a href="?id=admin_9">Create File</a></button>
+        <button class="admin_buttons"><a href="?id=admin_10">Edit/Delete File</a></button>
+    </div>
+
     
 </div>

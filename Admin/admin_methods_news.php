@@ -17,8 +17,8 @@ if (isset($_GET['edit_newslist'])) {
 
 if(isset($_POST['submit']) || isset($_POST['submit_update'])) {
     // Create new variables from form input fields when form is submitted
-    $news_title = mysqli_real_escape_string($con, $_POST['title']);
-    $news_content = mysqli_real_escape_string($con, $_POST['content']);
+    $news_title = $_POST['title'];
+    $news_content = $_POST['content'];
     $news_author = mysqli_real_escape_string($con, $_POST['author']);
     
     //If statement if submit - create news post , if submit_update - update news post data

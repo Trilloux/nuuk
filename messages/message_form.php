@@ -22,7 +22,7 @@
 <button type="button" id="addRecipient">Add Recipient</button>
 
 <!-- Pārējās formas lauki... -->
-    <label>Title</label>
+<label>Title</label>
         <input type="text" name="title" id="task_title" required>
     <label>Description</label>
         <textarea id="task_description" name="description" required></textarea>
@@ -33,7 +33,7 @@
     <div id="button_field">
         <input type="submit" name="submit" value="Send" class="form_button">
         <input type="reset" value="Reset" role="button" name="reset" class="form_button">
-            </div>
+    </div>
 </form>
 </div>
 
