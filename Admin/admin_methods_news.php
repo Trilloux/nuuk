@@ -38,6 +38,7 @@ function updateNEWS($updNewsId, $news_title, $news_content, $news_author){
         if (mysqli_stmt_execute($updNews_stmt)) {
             if (mysqli_stmt_affected_rows($updNews_stmt) > 0) {
                 echo 'News updated successfully';
+                header("Location: home.php?id=admin_4");
             } else {
                 echo 'No changes were made to the news data';
             }

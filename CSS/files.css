@@ -41,3 +41,34 @@
 #file_form input[type="file"]{
     border: none;
 }
+
+table, th, td{
+    border: 1px solid #FFA824 ;
+    font-size: 0.8vw;
+}
+
+#existing_files{
+margin-top: 5%;
+}
+
+#files_list {
+    text-decoration: none;
+    color: initial; 
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+a:visited #files_list {
+    color: black;
+}
+
+h2{
+    color: #FFA824;
+}
+
+.cut_text_cell_file {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10vw;
+}

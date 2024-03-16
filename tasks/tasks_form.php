@@ -14,7 +14,7 @@ include 'tasks_methods.php';
     <label>Title</label>
         <input type="text" name="title" id="task_title" required value="<?php echo $edit_title; ?>">
     <label>Description</label> 
-        <textarea id="task_description" name="description" required><?php echo preg_replace('/\v+|\\\r\\\n/Ui','<br/>',$edit_descr);?></textarea>
+        <textarea id="task_description" name="description" required><?php echo $edit_descr;?></textarea>
     <label>Alert on</label>
     <input type="datetime-local" name="alert" id="task_alert" value="<?php echo isset($edit_alert) ? $edit_alert : ''; ?>">
     <input type="submit" name="submit_alert" value="Remove alert" id="remove_alert">

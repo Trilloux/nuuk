@@ -100,7 +100,10 @@ header("Access-Control-Allow-Origin: *");
 						include 'Admin/edit_calendar.php';
 					}
 					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_9' && $_SESSION['role'] == 'admin'){
-						include 'Admin/file_form.php';
+						include 'Admin/create_file.php';
+					}
+					if(isset($_GET['id']) && isset($_SESSION['role']) && $_GET['id'] == 'admin_10' && $_SESSION['role'] == 'admin'){
+						include 'Admin/edit_files.php';
 					}
 					if($_GET['id']=='edit_id'){
 						include 'edit_profile.php';

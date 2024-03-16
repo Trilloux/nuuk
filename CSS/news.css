@@ -4,6 +4,8 @@
     justify-content: center;
     align-items: center;
     min-height: 100%;
+    min-width: 52vw !important;
+    max-width: 52vw !important;
 }
 
 #title_field{
@@ -27,12 +29,14 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    min-width: 52vw;
     margin-bottom: 2%;
 }
 #blog_content{
     background-color: #f3f3f3;
     border-radius: 7px;
+    min-width: 52vw !important;
+    max-width: 52vw !important;
 
 }
 #author_field{
