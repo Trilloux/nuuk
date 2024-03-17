@@ -72,3 +72,84 @@ h2{
     text-overflow: ellipsis;
     max-width: 10vw;
 }
+
+#file_dashboard_wrapper{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#file_dash_header {
+    margin-top: 5%;
+    animation: pulseText 2s ease-in-out;
+}
+
+@keyframes pulseText {
+    0% {
+        transform: scale(1); /* Sākuma lielums */
+        opacity: 1; /* Sākuma caurspīdīgums */
+    }
+    50% {
+        transform: scale(1.05); /* Vidējais lielums */
+        opacity: 0.8; /* Vidējais caurspīdīgums */
+    }
+    100% {
+        transform: scale(1); /* Beigu lielums */
+        opacity: 1; /* Beigu caurspīdīgums */
+    }
+}
+
+.file_posts{
+    min-width: 50vw;
+    max-width: 50vw;
+    background-color:#f3f3f3;
+    border-radius: 10px;
+   
+    padding-left: 2%;
+    padding-right: 2%;
+    transition: text-shadow 0.3s ease;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.file_posts a{
+    display: inline-block;
+    color:rgb(21, 32, 161);
+    font-size: medium;
+    font-weight: 500;
+    text-decoration-line: none;
+    margin-top: .3vw;
+    margin-bottom: .3vw;
+    transition: text-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.file_posts a:hover{
+    transform: scale(1.02);
+}
+
+.file_posts a:visited{
+    color: #761a9d;
+}
+
+.file_posts:hover{
+    transform: scale(1.02);
+}
+
+.file_dashboard{
+    color: #FFA824;
+    font-size: larger;
+}
+
+.file_post_content{
+    color: black;
+    font-weight:550;
+}
+
+.file_post_info{
+   text-align: right;
+    color: #FFA824;
+    font-weight: 550;
+}

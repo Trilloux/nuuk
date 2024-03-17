@@ -22,7 +22,8 @@ include 'Admin/admin_methods_news.php';
         <?php 
         $listFilesQuery="SELECT * FROM files";
         $filesResult=mysqli_query($con, $listFilesQuery);
-        while($row=mysqli_fetch_array($filesResult)){
+        if(mysqli_num_rows($filesResult) > 0){
+            while($row=mysqli_fetch_array($filesResult)){
         ?>
         <tr>
             <td><?php echo $row['id'] ?></td>
@@ -34,7 +35,12 @@ include 'Admin/admin_methods_news.php';
             <td><button><a id="edit_newslist" href="home.php?id=admin_9&edit_file=<?php echo $row['id']; ?>">Edit</a></button></td>
             <td><button onclick="deleteNews(<?php echo $row['id']; ?>)">Delete</button></td>
             </tr>
-        <?php } ?>
+        <?php }
+        }else{
+            echo '<p class="noMessages">There currently are no File posts!</p>';
+        }
+    
+        ?>
         </table>
 </div>
 

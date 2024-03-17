@@ -21,6 +21,7 @@ include 'Admin/admin_methods_news.php';
         <?php 
         $listNewsQuery="SELECT * FROM news_feed";
         $listResult=mysqli_query($con, $listNewsQuery);
+        if(mysqli_num_rows($listResult) > 0){
         while($row=mysqli_fetch_array($listResult)){
         ?>
         <tr>
@@ -32,7 +33,10 @@ include 'Admin/admin_methods_news.php';
             <td><button><a id="edit_newslist" href="home.php?id=admin_3&edit_newslist=<?php echo $row['id']; ?>">Edit</a></button></td>
             <td><button onclick="deleteNews(<?php echo $row['id']; ?>)">Delete</button></td>
             </tr>
-        <?php } ?>
+        <?php }
+        }else{
+            echo '<p class="noMessages">There currently are no News posts!</p>';
+        } ?>
         </table>
 </div>
 

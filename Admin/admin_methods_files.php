@@ -11,24 +11,6 @@ if (isset($_GET['edit_file'])) {
     if ($row = mysqli_fetch_array($files_result)) {
         $edit_file_title = $row['title'];
         $edit_file_content = $row['text'];
-        //show file paths in form
-        $edit_file_path = explode(',', $row['file_path']);
-       
-    }
-
-    // get file paths from db
-    $existing_files_query = "SELECT file_path FROM files";
-    $existing_files_result = mysqli_query($con, $existing_files_query);
-
-    // save in array
-    $existing_files = array();
-
-    // check if there are results
-    if(mysqli_num_rows($existing_files_result) > 0) {
-        while($row = mysqli_fetch_assoc($existing_files_result)) {
-            // add file_path to arrray
-            $existing_files[] = $row['file_path'];
-        }
     }
 }
 
@@ -136,4 +118,3 @@ function deleteFilePost($filePostId) {
 }
 
 ?>
-
