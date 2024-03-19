@@ -1,6 +1,6 @@
 <?php 
 include '../database.php';
-
+//For message count
 $inbox_messages_table = 'user_'.$_SESSION['id'].'_inbox';
 getMessageCount($inbox_messages_table);
 

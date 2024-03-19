@@ -168,7 +168,8 @@ if(isset($_POST['submit_reply'])){
     $reply_text = mysqli_real_escape_string($con, $_POST['description']);
     $sent_by = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
 
-    // Izvilkiet saņēmēja ID no datu bāzes, izmantojot viņa vārdu un uzvārdu
+   
+    //Get recipient id from database using firstName and lastName
     $recipient_name = $_POST['recipient'];
     $recipient_query = "SELECT id FROM users WHERE CONCAT(firstName, ' ', lastName) = '$recipient_name'";
     $recipient_result = mysqli_query($con, $recipient_query);
@@ -176,7 +177,7 @@ if(isset($_POST['submit_reply'])){
         $recipient_id = $recipient_row['id'];
     } else {
         echo "Recipient not found!";
-        return; // Pārtraucam funkcijas izpildi, ja saņēmējs nav atrasts
+        return; // End fuction if no recipient found
     }
 
     if(isset($_FILES['file_upload']) && is_array($_FILES['file_upload']['name'])) {
@@ -228,77 +229,58 @@ function replyMessage($con, $recipient_id, $reply_title, $reply_text, $msg_file,
     }
 }
 
-// Pārbaudīt, vai ir nospiesta delete pogas
+
+//Check if delete is pressed 
 if (isset($_GET['delete_inbox_ids'])) {
-    $del_ids = explode(',', $_GET['delete_inbox_ids']); // Sadalīt komatu atdalītus ID stringus par masīvu ar ID
-    deleteInboxMessages($del_ids, $MsgTab_name); // Dzēst inbox ziņojumus
+    $del_ids = explode(',', $_GET['delete_inbox_ids']); // Seperate ID string with comma, create array with delete ids
+    deleteInboxMessages($del_ids, $MsgTab_name); //Delete inbox messages
 }
 
 if (isset($_GET['delete_outbox_ids'])) {
-    $del_ids = explode(',', $_GET['delete_outbox_ids']); // Sadalīt komatu atdalītus ID stringus par masīvu ar ID
-    deleteOutboxMessages($del_ids, $SendTab_name); // Dzēst outbox ziņojumus
+    $del_ids = explode(',', $_GET['delete_outbox_ids']); // Seperate ID string with comma, create array with delete ids
+    deleteOutboxMessages($del_ids, $SendTab_name); // Delete outbox messages
 }
 
-// Funkcija, lai dzēstu inbox ziņas no attiecīgās tabulas
+// function to delete inbox messages
 function deleteInboxMessages($del_ids, $table_name) {
     global $con;
-    // Pārbaudīt, vai ir pieslēgums datubāzei
     if ($con) {
-        // Sagatavot SQL vaicājumu
         $delMsg_query = "DELETE FROM $table_name WHERE id = ?";
         $delMsg_stmt = mysqli_prepare($con, $delMsg_query);
         
         if ($delMsg_stmt) {
-            // Saistīt parametru ar SQL vaicājumu
             mysqli_stmt_bind_param($delMsg_stmt, 'i', $del_id);
-            
-            // Iterēt cauri katram norādītajam ID un izpildīt dzēšanu
+            // Iterate trough delete ids to delete message
             foreach ($del_ids as $del_id) {
                 mysqli_stmt_execute($delMsg_stmt);
             }
-            
-            // Aizvērt sagatavoto paziņojumu
             mysqli_stmt_close($delMsg_stmt);
-            
-            // Paziņojums par veiksmīgu dzēšanu
         } else {
-            // Paziņot par kļūdu, ja neizdevās sagatavot paziņojumu
             echo "Error preparing statement: " . mysqli_error($con);
         }
     } else {
-        // Paziņot, ja nav izveidots savienojums ar datubāzi
         echo "Error: No database connection!";
     }
 }
 
-// Funkcija, lai dzēstu outbox ziņas no attiecīgās tabulas
+// Function to delete outbox messages
 function deleteOutboxMessages($del_ids, $table_name) {
     global $con;
-    // Pārbaudīt, vai ir pieslēgums datubāzei
     if ($con) {
-        // Sagatavot SQL vaicājumu
         $delMsg_query = "DELETE FROM $table_name WHERE id = ?";
         $delMsg_stmt = mysqli_prepare($con, $delMsg_query);
-        
+
         if ($delMsg_stmt) {
-            // Saistīt parametru ar SQL vaicājumu
             mysqli_stmt_bind_param($delMsg_stmt, 'i', $del_id);
-            
-            // Iterēt cauri katram norādītajam ID un izpildīt dzēšanu
+            // Iterate trough delete ids to delete messages
             foreach ($del_ids as $del_id) {
                 mysqli_stmt_execute($delMsg_stmt);
             }
-            
-            // Aizvērt sagatavoto paziņojumu
             mysqli_stmt_close($delMsg_stmt);
-            
-            // Paziņojums par veiksmīgu dzēšanu
         } else {
-            // Paziņot par kļūdu, ja neizdevās sagatavot paziņojumu
             echo "Error preparing statement: " . mysqli_error($con);
         }
     } else {
-        // Paziņot, ja nav izveidots savienojums ar datubāzi
         echo "Error: No database connection!";
     }
 }
@@ -319,7 +301,7 @@ function markImportant($MsgTab_name, $imp_ids) {
         mysqli_stmt_fetch($check_imp_stmt);
         mysqli_stmt_close($check_imp_stmt);
 
-        // Ja sastopams statuss 'yes', tad mainīt uz 'no', un otrādi
+        // IF status = 'yes', change to = 'no', and other way around
         $new_priority = ($important == 'yes') ? 'no' : 'yes';
 
         $imp_query = "UPDATE $MsgTab_name SET important = ? WHERE id = ?";
@@ -352,7 +334,7 @@ function markRead($MsgTab_name,$read_ids ){
         mysqli_stmt_fetch($check_read_stmt);
         mysqli_stmt_close($check_read_stmt);
 
-        // Ja sastopams statuss 'yes', tad mainīt uz 'no', un otrādi
+        // IF status = 'yes', change to = 'no', and other way around
         $new_read = ($read == 'read') ? 'not_read' : 'read';
 
         $read_query = "UPDATE $MsgTab_name SET mark = ? WHERE id = ?";

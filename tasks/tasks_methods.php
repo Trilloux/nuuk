@@ -103,6 +103,11 @@ function updateTask($table_name, $task_id, $task_title, $task_descr, $task_prior
         mysqli_stmt_bind_param($updTask_stmt, 'ssssi', $task_title, $task_descr, $task_priority, $task_alert, $task_id);
         if (mysqli_stmt_execute($updTask_stmt)) {
             echo 'Task updated successfully!';
+            echo '<script>';
+            echo 'setTimeout(function() {';
+            echo '  window.location.href = "home.php?id=2";';
+            echo '}, 1000);'; // 2000 milisekundes = 2 sekundes
+            echo '</script>';
         } else {
             echo 'Error executing statement: ' . mysqli_stmt_error($updTask_stmt);
         }

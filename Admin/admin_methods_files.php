@@ -88,7 +88,11 @@ function editFiles($file_id, $filePost_title, $filePost_descr, $filePost_by, $ad
         mysqli_stmt_bind_param($updateFile_stmt, 'ssssi', $filePost_title, $filePost_descr, $filePost_by, $add_file, $file_id);
         if(mysqli_stmt_execute($updateFile_stmt)){
             echo 'File post updated!';
-            header ("Location: home.php?id=admin_10");
+            echo '<script>';
+            echo 'setTimeout(function() {';
+            echo '  window.location.href = "home.php?id=admin_10";';
+            echo '}, 1000);'; // 1000 milisekundes = 1 sekundes
+            echo '</script>';
         }else{
             echo 'Error updating file post '.mysqli_stmt_error($updateFile_stmt);
         }

@@ -21,16 +21,13 @@
                 <br>
                 <?php
                         if (strpos($row['context'], 'http') !== false) {
-                        // Aizvietojam saites ar HTML
+                        // replace hyperlins with a href
                         $content_with_links = preg_replace("/(http[^\s]+)/", "<a href='$1'>$1</a>", $row["context"]);
 
-                        // Aizvietojam `<br>` ar tukšu atstarpi aiz saitēm
                         $content_with_links = str_replace('<br>', ' ', $content_with_links);
 
-                        // Izvadām tekstu ar linkiem un aizvietojam \v+, \r, \n ar <br/> tagu
                         echo preg_replace('/(?<!<\/a>)\v+|\\\r\\\n|\\n/', '<br/>', $content_with_links);
                         } else {
-                        // Ja nav saites, vienkārši izvadam tekstu un aizvietojam \v+, \r, \n ar <br/> tagu
                         echo preg_replace('/\v+|\\\r\\\n|\\n/', '<br/>', $row["context"]);
                         }
                         ?>

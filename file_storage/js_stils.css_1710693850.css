@@ -1,0 +1,55 @@
+@font-face {
+    font-family: Sofia, cursive;
+    src: url(fonts/Sofia-Regular.ttf);
+
+}
+
+*{
+    box-sizing: border-box;
+}
+
+div#container{
+    width: 50%;
+    margin:auto;
+    border: 1px solid grey;
+    padding: 10px;
+    
+}
+
+button{
+    width: 150px;
+    text-align: align;
+    padding: 3px;
+    border-radius: 15px;
+    font-size: 1.2vW;
+    margin-left: 60px;
+}
+
+span{
+    color: red;
+    font-weight: bold;
+}
+
+p, li{
+    font-size: 1.2vW;
+}
+
+input{
+font-size: 1.2vW;
+margin-left: 60px;
+}
+
+img{
+    width: 150px;
+}
+
+img .mazs{
+width:300px;
+margin-left: 150px;
+}
+
+div#info{
+    width: 100%;
+    height: 100px;
+    font-size: 1.2vW;
+}

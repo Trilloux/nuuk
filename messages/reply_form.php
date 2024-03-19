@@ -1,9 +1,10 @@
 <?php
-// Pārbaudīt, vai ir nospiesta "reply" poga un vai ir norādīts message_id
+
+//Check if reply is pressed and has message id 
 if(isset($_GET['section']) && $_GET['section'] == 'reply' && isset($_GET['reply_id'])) {
     $message_id = $_GET['reply_id'];
 
-    // Izgūstam ziņas informāciju no datu bāzes, izmantojot message_id
+    //Show message content from db using message id
     $message_query = "SELECT * FROM $MsgTab_name WHERE id = $message_id";
     $message_result = mysqli_query($con, $message_query);
     $message_row = mysqli_fetch_array($message_result);

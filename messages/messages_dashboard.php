@@ -17,10 +17,11 @@ include 'messages_methods.php';
         <button class="task_buttons" onclick="markRead()" >&#x2713; Read</button>
     </div>
     <?php 
-    // Pārbaudām, vai GET parametrs 'section' ir definēts un atbilstošs
+   
+    //Check if get parameter is defined for section to use
     if(isset($_GET['section'])){
         $section = $_GET['section'];
-        // Atkarībā no norādītās sadaļas, ielādējam attiecīgo messages sekciju
+        //deppending on get case will display section
         switch($section){
             case 'sent':
                 include 'messages_outbox.php';
@@ -32,12 +33,12 @@ include 'messages_methods.php';
                 include 'reply_form.php';
                 break;
             default:
-                // Ja norādītā sadaļa nav atpazīta, noklusējuma kārtā ielādējam inbox
+                // Default is inbox
                 include 'messages_inbox.php';
                 break;
         }
     } else {
-        // Ja sadaļa nav norādīta, noklusējuma kārtā ielādējam inbox
+        // If section is not chosen, then display inbox
         include 'messages_inbox.php';
     }
     ?>
