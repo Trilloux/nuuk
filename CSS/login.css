@@ -15,6 +15,7 @@ body{
     width: 100%;
     min-height: 70vw;
     background-color: white;
+    position: relative;
 }
 /* Cloud images animation settings*/
 @keyframes cloud_move {
@@ -32,20 +33,20 @@ body{
   #cloud_1 {
     z-index: 2;
     position: absolute;
-    top: 6%;
-    right: 12%;
-    width: 25%;
-    height: 26%;
+    top: -7%;
+    right: -2%;
+    width: 33%;
+    height: 16%;
     animation: cloud_move 4s infinite linear alternate; /* 4s - animation duaration, infinite - repeat all time, linear - linear movement, alternate - change direction*/
   }
   /* cloud img 2 */
   #cloud_2 {
     z-index: 1;
     position: absolute;
-    top: 6%;
-    right: 10%;
-    width: 17%;
-    height: 20%;
+    top: -7%;
+    right: -5%;
+    width: 27%;
+    height: 13%;
     animation: cloud_move 3s infinite linear alternate; 
   }
 /* div cointainer*/

@@ -25,6 +25,7 @@ body{
     align-items: center;
     width: 70%;
    height: 10vw;
+   position: relative;
 
 }
 
@@ -85,22 +86,22 @@ body{
   }
 
   #cloud_1 {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
-    top: 7%;
-    right: 12%;
-    width: 25%;
-    height: 26%;
+    top: 31%;
+    right: -30%;
+    width: 40%;
+    height: 125%;
     animation: cloud_move 4s infinite linear alternate; /* 4s - animation duaration, infinite - repeat all time, linear - linear movement, alternate - change direction*/
   }
   /* cloud img 2 */
   #cloud_2 {
-    z-index: 1;
+    z-index: 2;
     position: absolute;
-    top: 10%;
-    right: 9%;
-    width: 17%;
-    height: 20%;
+    top: 29%;
+    right: -37%;
+    width: 36%;
+    height: 107%;
     animation: cloud_move 3s infinite linear alternate; 
   }
 #container{
@@ -308,6 +309,7 @@ transform: scale(1);
    justify-content: flex-end;
     width: 100%;
     height: 25vw;
+    position: relative;
 }
 #imgage_section{
     width: 50%;
