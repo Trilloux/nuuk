@@ -293,6 +293,15 @@ transform: scale(1);
   max-height: 2vw;
 }
 
+.other_user_email{
+ 
+  color:  #0046a0 !important;
+  cursor: pointer;
+}
+.other_user_email a:visited {
+  color: #0046a0 !important;
+}
+
 #online_info_link{
   text-decoration-line: none;
   transition: text-shadow 0.3s ease;

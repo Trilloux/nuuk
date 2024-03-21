@@ -39,7 +39,7 @@ if(isset($_GET['show_info'])) {
             <div class="user_text_info">
                 <p>First Name: <?php echo $user_info['firstName']; ?></p>
                 <p>Last Name: <?php echo $user_info['lastName']; ?></p>
-                <p>Email: <?php echo $user_info['email']; ?></p>
+                <p>E-mail: <a class="other_user_email" href="mailto:<?php echo $user_info['email']; ?>"> <?php echo $user_info['email']; ?></a></p>
                 <p>Phone: <?php echo $user_info['phone']; ?></p>
             </div>
         </div>
